@@ -1,7 +1,12 @@
+import React from "react";
+
 import "./App.css";
 import TodoInput from "./component/TodoInput";
+import TodoList from "./component/TodoList";
 
 export default function App() {
+  const tasks = [{ id: 0, content: "Default Task" }];
+
   return (
     <div className="App">
       <section className="todoapp">
@@ -11,7 +16,7 @@ export default function App() {
         </div>
         <div className="main">
           <input className="toggle-all" type="checkbox" />
-          <ul id="todo-list" className="todo-list" />
+          <TodoList tasks={tasks} />
         </div>
         <div className="count-container">
           <span className="todo-count">
