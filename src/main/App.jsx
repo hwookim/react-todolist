@@ -5,7 +5,7 @@ import TodoInput from "./component/TodoInput";
 import TodoList from "./component/TodoList";
 
 export default function App() {
-  const tasks = [{ id: 0, content: "Default Task" }];
+  const tasks = [];
 
   return (
     <div className="App">
@@ -24,17 +24,17 @@ export default function App() {
           </span>
           <ul className="filters">
             <li>
-              <a className="filter all selected" href="#/">
+              <a className="filter all selected" href="/">
                 전체보기
               </a>
             </li>
             <li>
-              <a className="filter active" href="#/active">
+              <a className="filter active" href="/active">
                 해야할 일
               </a>
             </li>
             <li>
-              <a className="filter completed" href="#/completed">
+              <a className="filter completed" href="/completed">
                 완료한 일
               </a>
             </li>
