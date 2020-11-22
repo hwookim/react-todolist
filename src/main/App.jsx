@@ -1,4 +1,5 @@
 import "./App.css";
+import TodoInput from "./component/TodoInput";
 
 export default function App() {
   return (
@@ -6,12 +7,7 @@ export default function App() {
       <section className="todoapp">
         <div>
           <h1>TODOS</h1>
-          <input
-            id="new-todo-title"
-            className="new-todo"
-            placeholder="할일을 추가해주세요"
-            autoFocus
-          />
+          <TodoInput />
         </div>
         <div className="main">
           <input className="toggle-all" type="checkbox" />
