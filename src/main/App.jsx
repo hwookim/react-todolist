@@ -6,13 +6,16 @@ import TodoList from "./component/TodoList";
 
 export default function App() {
   const tasks = [];
+  const onInsert = (value) => {
+    console.log(value);
+  };
 
   return (
     <div className="App">
       <section className="todoapp">
         <div>
           <h1>TODOS</h1>
-          <TodoInput />
+          <TodoInput onInsert={onInsert} />
         </div>
         <div className="main">
           <input className="toggle-all" type="checkbox" />
