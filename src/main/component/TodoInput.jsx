@@ -7,8 +7,8 @@ export default function TodoInput({ onInsert }) {
   };
   const onChange = useCallback(setValueOfEvent, []);
 
-  const onEnter = (event) => {
-    if (event.charCode !== 13) {
+  const onEnter = ({ key }) => {
+    if (key !== "Enter") {
       return;
     }
 
