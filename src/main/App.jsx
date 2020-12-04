@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
 import "./App.css";
 import TodoInput from "./component/TodoInput";
 import TodoList from "./component/TodoList";
 
 export default function App() {
-  const tasks = [];
-  const onInsert = (value) => {
-    console.log(value);
+  const [tasks, setTasks] = useState([]);
+  const id = useRef(1);
+
+  const onInsert = (content) => {
+    const task = {
+      id: id.current++,
+      content,
+    };
+    setTasks(tasks.concat(task));
   };
 
   return (
