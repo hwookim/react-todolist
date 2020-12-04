@@ -21,7 +21,7 @@ export default function TodoInput({ onInsert }) {
       placeholder="할일을 추가해주세요"
       value={value}
       onChange={onChange}
-      onKeyDown={onEnter}
+      onKeyPress={onEnter}
       autoFocus
     />
   );
