@@ -10,19 +10,39 @@ describe("TodoInput", () => {
   const $input = container.querySelector(".new-todo");
 
   context("with value", () => {
-    fireEvent.change($input, {
-      target: { value: "Let's TDD" },
-    });
+    const value = "Let's TDD";
 
     it("keypress Enter run method onInsert by value and clear value", () => {
+      fireEvent.change($input, {
+        target: { value: value },
+      });
+
       fireEvent.keyPress($input, {
         key: "Enter",
         code: 13,
         charCode: 13,
       });
 
-      expect(onInsert).toBeCalledWith("Let's TDD");
+      expect(onInsert).toBeCalledWith(value);
       expect($input).toHaveValue("");
+    });
+  });
+
+  context("without value", () => {
+    const value = " ";
+
+    it("does not run method", () => {
+      fireEvent.change($input, {
+        target: { value },
+      });
+
+      fireEvent.keyPress($input, {
+        key: "Enter",
+        code: 13,
+        charCode: 13,
+      });
+
+      expect(onInsert).not.toHaveBeenCalled();
     });
   });
 });

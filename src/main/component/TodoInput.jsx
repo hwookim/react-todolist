@@ -12,6 +12,10 @@ export default function TodoInput({ onInsert }) {
       return;
     }
 
+    if (text.trim() === "") {
+      return;
+    }
+
     onInsert(text);
     setText("");
   };
