@@ -21,6 +21,24 @@ describe("TodoItem", () => {
     });
   });
 
+  context("with completed task", () => {
+    const task = {
+      id: 1,
+      content: "Todo!",
+      completed: true,
+    };
+
+    it("render task content", () => {
+      const { container } = renderTodoItem(task);
+      expect(container).toHaveTextContent(task.content);
+
+      const $li = container.querySelector("li");
+      const $btn = container.querySelector(".toggle");
+      expect($li).toHaveClass("completed");
+      expect($btn).toHaveAttribute("checked");
+    });
+  });
+
   context("click toggle btn", () => {
     const task = {
       id: 1,

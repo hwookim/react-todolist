@@ -14,7 +14,12 @@ export default function TodoItem({ task: { id, content, completed } }) {
   return (
     <li className={getStatus()} data-id={id}>
       <div className="view">
-        <input className="toggle" type="checkbox" onClick={handleToggleTodo} />
+        <input
+          className="toggle"
+          type="checkbox"
+          onClick={handleToggleTodo}
+          defaultChecked={isCompleted}
+        />
         <label className="label">{content}</label>
         <button className="destroy" />
       </div>
