@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-export default function TodoItem({ task: { id, content, completed } }) {
+export default function TodoItem({
+  task: { id, content, completed },
+  onDelete,
+}) {
   const [isCompleted, setIsCompleted] = useState(completed);
 
   const handleToggleTodo = () => {
@@ -9,6 +12,10 @@ export default function TodoItem({ task: { id, content, completed } }) {
 
   const getStatus = () => {
     return isCompleted ? "completed" : "";
+  };
+
+  const handleDeleteTodo = () => {
+    onDelete(id);
   };
 
   return (
@@ -21,7 +28,7 @@ export default function TodoItem({ task: { id, content, completed } }) {
           defaultChecked={isCompleted}
         />
         <label className="label">{content}</label>
-        <button className="destroy" />
+        <button className="destroy" onClick={handleDeleteTodo} />
       </div>
       <input className="edit" />
     </li>

@@ -5,8 +5,8 @@ import context from "jest-plugin-context";
 import TodoItem from "../../main/component/TodoItem";
 
 describe("TodoItem", () => {
-  function renderTodoItem(task) {
-    return render(<TodoItem task={task} />);
+  function renderTodoItem(task, onDelete) {
+    return render(<TodoItem task={task} onDelete={onDelete} />);
   }
 
   context("with not completed task", () => {
@@ -69,6 +69,22 @@ describe("TodoItem", () => {
 
     it("remove class", () => {
       expect($li).not.toHaveClass("completed");
+    });
+  });
+
+  context("click destroy btn", () => {
+    const task = {
+      id: 1,
+      content: "Todo!",
+    };
+    const onDelete = jest.fn();
+
+    it("run method", () => {
+      const { container } = renderTodoItem(task, onDelete);
+      const $destroyBtn = container.querySelector(".destroy");
+
+      fireEvent.click($destroyBtn);
+      expect(onDelete).toHaveBeenCalled();
     });
   });
 });

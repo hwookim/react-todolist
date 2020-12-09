@@ -16,6 +16,10 @@ export default function App() {
     setTasks(tasks.concat(task));
   };
 
+  const onDelete = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
   return (
     <div className="App">
       <section className="todoapp">
@@ -25,7 +29,7 @@ export default function App() {
         </div>
         <div className="main">
           <input className="toggle-all" type="checkbox" />
-          <TodoList tasks={tasks} />
+          <TodoList tasks={tasks} onDelete={onDelete} />
         </div>
         <div className="count-container">
           <span className="todo-count">
