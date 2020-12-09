@@ -19,12 +19,4 @@ describe("TodoList", () => {
       );
     });
   });
-
-  context("without Tasks", () => {
-    it("render Lists", () => {
-      const { container } = render(<TodoList tasks={[]} />);
-
-      expect(container).toHaveTextContent("할 일이 없어요");
-    });
-  });
 });
