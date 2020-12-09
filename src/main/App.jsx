@@ -8,7 +8,7 @@ export default function App() {
   const [tasks, setTasks] = useState([]);
   const id = useRef(1);
 
-  const onInsert = (content) => {
+  const handleAddTodo = (content) => {
     const task = {
       id: id.current++,
       content,
@@ -16,7 +16,7 @@ export default function App() {
     setTasks(tasks.concat(task));
   };
 
-  const onDelete = (id) => {
+  const handleDeleteTodo = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
@@ -25,11 +25,11 @@ export default function App() {
       <section className="todoapp">
         <div>
           <h1>TODOS</h1>
-          <TodoInput onInsert={onInsert} />
+          <TodoInput onInsert={handleAddTodo} />
         </div>
         <div className="main">
           <input className="toggle-all" type="checkbox" />
-          <TodoList tasks={tasks} onDelete={onDelete} />
+          <TodoList tasks={tasks} onDelete={handleDeleteTodo} />
         </div>
         <div className="count-container">
           <span className="todo-count">
