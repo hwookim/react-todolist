@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 
-export default function TodoItem({ task }) {
-  const [completed, setCompleted] = useState(false);
+export default function TodoItem({ task: { id, content, completed } }) {
+  const [isCompleted, setIsCompleted] = useState(completed);
 
   const handleToggleTodo = () => {
-    setCompleted(!completed);
+    setIsCompleted(!isCompleted);
   };
 
   const getStatus = () => {
-    return completed ? "completed" : "";
+    return isCompleted ? "completed" : "";
   };
 
   return (
-    <li className={getStatus()}>
+    <li className={getStatus()} data-id={id}>
       <div className="view">
         <input className="toggle" type="checkbox" onClick={handleToggleTodo} />
-        <label className="label">{task.content}</label>
+        <label className="label">{content}</label>
         <button className="destroy" />
       </div>
       <input className="edit" />

@@ -14,8 +14,8 @@ describe("TodoList", () => {
     it("render Lists", () => {
       const { container } = render(<TodoList tasks={tasks} />);
 
-      tasks.forEach((task) =>
-        expect(container).toHaveTextContent(task.content),
+      tasks.forEach(({ content }) =>
+        expect(container).toHaveTextContent(content),
       );
     });
   });
