@@ -9,7 +9,7 @@ describe("TodoFilter", () => {
     return render(<TodoFilter />);
   }
 
-  it("render three btn", () => {
+  it("render all buttons", () => {
     const { container } = renderFilter();
 
     Object.values(FILTER).forEach(({ text }) =>
