@@ -28,7 +28,7 @@ describe("TodoItem", () => {
       completed: true,
     };
 
-    it("render task content", () => {
+    it("render task content with checked", () => {
       const { container } = renderTodoItem(task);
       expect(container).toHaveTextContent(task.content);
 
