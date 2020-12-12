@@ -1,11 +1,11 @@
 import React from "react";
-import TodoItem from "./TodoItem";
+import TodoListItem from "./TodoListItem";
 
 export default function TodoList({ tasks, onDelete }) {
   return (
     <ul id="todo-list" className="todo-list">
       {tasks.map((task) => (
-        <TodoItem key={task.id} task={task} onDelete={onDelete} />
+        <TodoListItem key={task.id} task={task} onDelete={onDelete} />
       ))}
     </ul>
   );

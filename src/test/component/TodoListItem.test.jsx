@@ -2,11 +2,11 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import context from "jest-plugin-context";
 
-import TodoItem from "../../main/component/TodoItem";
+import TodoListItem from "../../main/component/TodoListItem";
 
-describe("TodoItem", () => {
-  function renderTodoItem(task, onDelete) {
-    return render(<TodoItem task={task} onDelete={onDelete} />);
+describe("TodoListItem", () => {
+  function renderListItem(task, onDelete) {
+    return render(<TodoListItem task={task} onDelete={onDelete} />);
   }
 
   context("with not completed task", () => {
@@ -16,7 +16,7 @@ describe("TodoItem", () => {
     };
 
     it("render task content", () => {
-      const { container } = renderTodoItem(task);
+      const { container } = renderListItem(task);
       expect(container).toHaveTextContent(task.content);
     });
   });
@@ -29,7 +29,7 @@ describe("TodoItem", () => {
     };
 
     it("render task content with checked", () => {
-      const { container } = renderTodoItem(task);
+      const { container } = renderListItem(task);
       expect(container).toHaveTextContent(task.content);
 
       const $li = container.querySelector("li");
@@ -45,7 +45,7 @@ describe("TodoItem", () => {
       content: "Todo!",
     };
 
-    const { container } = renderTodoItem(task);
+    const { container } = renderListItem(task);
     const $li = container.querySelector("li");
     const $btn = container.querySelector(".toggle");
     fireEvent.click($btn);
@@ -61,7 +61,7 @@ describe("TodoItem", () => {
       content: "Todo!",
     };
 
-    const { container } = renderTodoItem(task);
+    const { container } = renderListItem(task);
     const $li = container.querySelector("li");
     const $btn = container.querySelector(".toggle");
     fireEvent.click($btn);
@@ -80,7 +80,7 @@ describe("TodoItem", () => {
     const onDelete = jest.fn();
 
     it("run method", () => {
-      const { container } = renderTodoItem(task, onDelete);
+      const { container } = renderListItem(task, onDelete);
       const $destroyBtn = container.querySelector(".destroy");
 
       fireEvent.click($destroyBtn);

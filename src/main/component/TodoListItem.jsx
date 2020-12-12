@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function TodoItem({
+export default function TodoListItem({
   task: { id, content, completed },
   onDelete,
 }) {
