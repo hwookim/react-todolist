@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import "./App.css";
 import TodoInput from "./component/TodoInput";
 import TodoList from "./component/TodoList";
+import TodoFilter from "./component/TodoFilter";
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
@@ -35,23 +36,7 @@ export default function App() {
           <span className="todo-count">
             총 <strong>0</strong> 개
           </span>
-          <ul className="filters">
-            <li>
-              <a className="filter all selected" href="/">
-                전체보기
-              </a>
-            </li>
-            <li>
-              <a className="filter active" href="/active">
-                해야할 일
-              </a>
-            </li>
-            <li>
-              <a className="filter completed" href="/completed">
-                완료한 일
-              </a>
-            </li>
-          </ul>
+          <TodoFilter />
         </div>
       </section>
     </div>
