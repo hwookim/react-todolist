@@ -5,16 +5,15 @@ export default function TodoFilterItem({
   onSelect,
   isSelected,
 }) {
+  const className = [state, isSelected ? "selected" : ""].join(" ").trim();
+
   const handleSelectFilter = () => {
     onSelect(state);
   };
 
   return (
     <li>
-      <a
-        className={isSelected ? "selected" : ""}
-        href={href}
-        onClick={handleSelectFilter}>
+      <a className={className} href={href} onClick={handleSelectFilter}>
         {text}
       </a>
     </li>

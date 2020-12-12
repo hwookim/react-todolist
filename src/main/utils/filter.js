@@ -16,4 +16,8 @@ const FILTER = {
   },
 };
 
-export { FILTER };
+function findFilterByState(target) {
+  return Object.values(FILTER).find(({ state }) => state === target);
+}
+
+export { FILTER, findFilterByState };

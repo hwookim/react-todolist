@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 
-import { FILTER } from "../utils/filter";
+import { FILTER, findFilterByState } from "../utils/filter";
 import TodoFilterItem from "./TodoFilterItem";
 
-export default function TodoFilter() {
-  const [selected, setSelected] = useState("all");
-
+export default function TodoFilter({ selected, onSelect }) {
   const handleSelectFilter = (state) => {
-    setSelected(state);
+    onSelect(findFilterByState(state));
   };
 
   return (
@@ -17,7 +15,7 @@ export default function TodoFilter() {
           key={filter.state}
           filter={filter}
           onSelect={handleSelectFilter}
-          isSelected={selected === filter.state}
+          isSelected={selected === filter}
         />
       ))}
     </ul>

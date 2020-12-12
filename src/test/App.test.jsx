@@ -51,4 +51,6 @@ describe("App", () => {
       expect($list).not.toHaveTextContent("Let's TDD");
     });
   });
+
+  //TODO: complete 구현 후 필터링 테스트
 });

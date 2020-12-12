@@ -4,8 +4,10 @@ import "./App.css";
 import TodoInput from "./component/TodoInput";
 import TodoList from "./component/TodoList";
 import TodoFilter from "./component/TodoFilter";
+import { FILTER } from "./utils/filter";
 
 export default function App() {
+  const [filter, setFilter] = useState(FILTER.ALL);
   const [tasks, setTasks] = useState([]);
   const id = useRef(1);
 
@@ -21,6 +23,20 @@ export default function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+  const handleSelectFilter = (selected) => {
+    setFilter(selected);
+  };
+
+  const filterTasks = () => {
+    if (filter === FILTER.ACTIVE) {
+      return tasks.filter((task) => !task.completed);
+    }
+    if (filter === FILTER.COMPLETED) {
+      return tasks.filter((task) => task.completed);
+    }
+    return tasks;
+  };
+
   return (
     <div className="App">
       <section className="todoapp">
@@ -30,13 +46,13 @@ export default function App() {
         </div>
         <div className="main">
           <input className="toggle-all" type="checkbox" />
-          <TodoList tasks={tasks} onDelete={handleDeleteTodo} />
+          <TodoList tasks={filterTasks()} onDelete={handleDeleteTodo} />
         </div>
         <div className="count-container">
           <span className="todo-count">
             총 <strong>0</strong> 개
           </span>
-          <TodoFilter />
+          <TodoFilter selected={filter} onSelect={handleSelectFilter} />
         </div>
       </section>
     </div>
