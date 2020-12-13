@@ -19,6 +19,12 @@ export default function App() {
     setTasks(tasks.concat(task));
   };
 
+  const handleToggleTodo = (id) => {
+    const target = tasks.find((task) => task.id === id);
+    target.completed = !target.completed;
+    setTasks(tasks);
+  };
+
   const handleDeleteTodo = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
@@ -46,7 +52,11 @@ export default function App() {
         </div>
         <div className="main">
           <input className="toggle-all" type="checkbox" />
-          <TodoList tasks={filterTasks()} onDelete={handleDeleteTodo} />
+          <TodoList
+            tasks={filterTasks()}
+            onToggle={handleToggleTodo}
+            onDelete={handleDeleteTodo}
+          />
         </div>
         <div className="count-container">
           <span className="todo-count">

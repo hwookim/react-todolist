@@ -5,8 +5,10 @@ import context from "jest-plugin-context";
 import TodoListItem from "../../main/component/TodoListItem";
 
 describe("TodoListItem", () => {
-  function renderListItem(task, onDelete) {
-    return render(<TodoListItem task={task} onDelete={onDelete} />);
+  function renderListItem({ task, onToggle, onDelete }) {
+    return render(
+      <TodoListItem task={task} onToggle={onToggle} onDelete={onDelete} />,
+    );
   }
 
   context("with not completed task", () => {
@@ -16,7 +18,7 @@ describe("TodoListItem", () => {
     };
 
     it("render task content", () => {
-      const { container } = renderListItem(task);
+      const { container } = renderListItem({ task });
       expect(container).toHaveTextContent(task.content);
     });
   });
@@ -29,7 +31,7 @@ describe("TodoListItem", () => {
     };
 
     it("render task content with checked", () => {
-      const { container } = renderListItem(task);
+      const { container } = renderListItem({ task });
       expect(container).toHaveTextContent(task.content);
 
       const $li = container.querySelector("li");
@@ -44,31 +46,14 @@ describe("TodoListItem", () => {
       id: 1,
       content: "Todo!",
     };
+    const onToggle = jest.fn();
 
-    const { container } = renderListItem(task);
-    const $li = container.querySelector("li");
-    const $btn = container.querySelector(".toggle");
-    fireEvent.click($btn);
+    it("run method", () => {
+      const { container } = renderListItem({ task, onToggle });
+      const $btn = container.querySelector(".toggle");
 
-    it("add class", () => {
-      expect($li).toHaveClass("completed");
-    });
-  });
-
-  context("click toggle btn twice", () => {
-    const task = {
-      id: 1,
-      content: "Todo!",
-    };
-
-    const { container } = renderListItem(task);
-    const $li = container.querySelector("li");
-    const $btn = container.querySelector(".toggle");
-    fireEvent.click($btn);
-    fireEvent.click($btn);
-
-    it("remove class", () => {
-      expect($li).not.toHaveClass("completed");
+      fireEvent.click($btn);
+      expect(onToggle).toHaveBeenCalled();
     });
   });
 
@@ -80,7 +65,7 @@ describe("TodoListItem", () => {
     const onDelete = jest.fn();
 
     it("run method", () => {
-      const { container } = renderListItem(task, onDelete);
+      const { container } = renderListItem({ task, onDelete });
       const $destroyBtn = container.querySelector(".destroy");
 
       fireEvent.click($destroyBtn);

@@ -52,5 +52,35 @@ describe("App", () => {
     });
   });
 
-  //TODO: complete 구현 후 필터링 테스트
+  context("filter completed", () => {
+    const { container } = renderApp();
+    const $input = container.querySelector(".new-todo");
+    const $list = container.querySelector(".todo-list");
+    const $completedBtn = container.querySelector(".active");
+
+    addTask($input, "1st Task");
+    addTask($input, "2nd Task");
+
+    const $firstTodoToggleBtn = container.querySelector(".toggle");
+    fireEvent.click($firstTodoToggleBtn);
+
+    fireEvent.click($completedBtn);
+
+    it("render only completed task ", () => {
+      expect($list).not.toHaveTextContent("1st Task");
+      expect($list).toHaveTextContent("2nd Task");
+    });
+  });
 });
+
+function addTask($input, value) {
+  fireEvent.change($input, {
+    target: { value },
+  });
+
+  fireEvent.keyPress($input, {
+    key: "Enter",
+    code: 13,
+    charCode: 13,
+  });
+}
