@@ -34,21 +34,13 @@ describe("App", () => {
     const $input = container.querySelector(".new-todo");
     const $list = container.querySelector(".todo-list");
 
-    fireEvent.change($input, {
-      target: { value: "Let's TDD" },
-    });
-
-    fireEvent.keyPress($input, {
-      key: "Enter",
-      code: 13,
-      charCode: 13,
-    });
+    addTask($input, "Task");
 
     const $destroyBtn = container.querySelector("[data-id='1'] .destroy");
     fireEvent.click($destroyBtn);
 
     it("remove item", () => {
-      expect($list).not.toHaveTextContent("Let's TDD");
+      expect($list).not.toHaveTextContent("Task");
     });
   });
 
