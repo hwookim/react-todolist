@@ -29,6 +29,21 @@ describe("App", () => {
     });
   });
 
+  context("click toggle btn of item", () => {
+    const { container } = renderApp();
+    const $input = container.querySelector(".new-todo");
+
+    addTask($input, "1st Task");
+
+    const $toggleBtn = container.querySelector(".toggle");
+    fireEvent.click($toggleBtn);
+
+    const $item = $toggleBtn.closest("li");
+    it("add completed class to closest li", () => {
+      expect($item).toHaveClass("completed");
+    });
+  });
+
   context("click destroy btn of item", () => {
     const { container } = renderApp();
     const $input = container.querySelector(".new-todo");

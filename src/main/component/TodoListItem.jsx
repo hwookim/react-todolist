@@ -5,11 +5,14 @@ export default function TodoListItem({
   onToggle,
   onDelete,
 }) {
+  const [isCompleted, setIsCompleted] = useState(completed);
+
   const getStatus = () => {
-    return completed ? "completed" : "";
+    return isCompleted ? "completed" : "";
   };
 
   const handleToggleTodo = () => {
+    setIsCompleted(!isCompleted);
     onToggle(id);
   };
 

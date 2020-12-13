@@ -57,6 +57,41 @@ describe("TodoListItem", () => {
     });
   });
 
+  context("click toggle btn", () => {
+    const task = {
+      id: 1,
+      content: "Todo!",
+    };
+    const onToggle = jest.fn();
+
+    const { container } = renderListItem({ task, onToggle });
+    const $li = container.querySelector("li");
+    const $btn = container.querySelector(".toggle");
+    fireEvent.click($btn);
+
+    it("add class", () => {
+      expect($li).toHaveClass("completed");
+    });
+  });
+
+  context("click toggle btn twice", () => {
+    const task = {
+      id: 1,
+      content: "Todo!",
+    };
+    const onToggle = jest.fn();
+
+    const { container } = renderListItem({ task, onToggle });
+    const $li = container.querySelector("li");
+    const $btn = container.querySelector(".toggle");
+    fireEvent.click($btn);
+    fireEvent.click($btn);
+
+    it("remove class", () => {
+      expect($li).not.toHaveClass("completed");
+    });
+  });
+
   context("click destroy btn", () => {
     const task = {
       id: 1,
