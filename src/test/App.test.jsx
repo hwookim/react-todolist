@@ -69,6 +69,7 @@ describe("App", () => {
     const $input = container.querySelector(".new-todo");
     const $list = container.querySelector(".todo-list");
     const $completedBtn = container.querySelector(".active");
+    const $count = container.querySelector(".todo-count");
 
     addTask($input, "1st Task");
     addTask($input, "2nd Task");
@@ -81,6 +82,9 @@ describe("App", () => {
     it("render only completed task ", () => {
       expect($list).not.toHaveTextContent("1st Task");
       expect($list).toHaveTextContent("2nd Task");
+    });
+    it("count only completed task", () => {
+      expect($count).toHaveTextContent("총 1 개");
     });
   });
 });
