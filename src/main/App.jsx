@@ -60,7 +60,7 @@ export default function App() {
         </div>
         <div className="count-container">
           <span className="todo-count">
-            총 <strong>0</strong> 개
+            총 <strong>{filterTasks().length}</strong> 개
           </span>
           <TodoFilter selected={filter} onSelect={handleSelectFilter} />
         </div>

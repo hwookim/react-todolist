@@ -13,6 +13,7 @@ describe("App", () => {
     const { container } = renderApp();
     const $input = container.querySelector(".new-todo");
     const $list = container.querySelector(".todo-list");
+    const $count = container.querySelector(".todo-count");
 
     fireEvent.change($input, {
       target: { value: "Let's TDD" },
@@ -26,6 +27,10 @@ describe("App", () => {
 
     it("render new task", () => {
       expect($list).toHaveTextContent("Let's TDD");
+    });
+
+    it("count new task", () => {
+      expect($count).toHaveTextContent("총 1 개");
     });
   });
 
