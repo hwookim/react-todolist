@@ -51,7 +51,6 @@ export default function App() {
           <TodoInput onInsert={handleAddTodo} />
         </div>
         <div className="main">
-          <input className="toggle-all" type="checkbox" />
           <TodoList
             tasks={filterTasks()}
             onToggle={handleToggleTodo}
