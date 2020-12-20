@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 
 import { FILTER, findFilterByState } from "../utils/filter";
 import TodoFilterItem from "./TodoFilterItem";
