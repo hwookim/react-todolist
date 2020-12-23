@@ -68,11 +68,12 @@ describe("App", () => {
     const { container } = renderApp();
     const $input = container.querySelector(".new-todo");
     const $list = container.querySelector(".todo-list");
-    const $completedBtn = container.querySelector(".active");
+    const $completedBtn = container.querySelector(".completed");
     const $count = container.querySelector(".todo-count");
 
     addTask($input, "1st Task");
     addTask($input, "2nd Task");
+    addTask($input, "3rd Task");
 
     const $firstTodoToggleBtn = container.querySelector(".toggle");
     fireEvent.click($firstTodoToggleBtn);
@@ -80,8 +81,9 @@ describe("App", () => {
     fireEvent.click($completedBtn);
 
     it("render only completed task ", () => {
-      expect($list).not.toHaveTextContent("1st Task");
-      expect($list).toHaveTextContent("2nd Task");
+      expect($list).toHaveTextContent("1st Task");
+      expect($list).not.toHaveTextContent("2nd Task");
+      expect($list).not.toHaveTextContent("3rd Task");
     });
     it("count only completed task", () => {
       expect($count).toHaveTextContent("총 1 개");
