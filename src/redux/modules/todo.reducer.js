@@ -27,7 +27,7 @@ export default function reducer(state = initialState, action) {
 
       return {
         ...state,
-        todos: (todos || []).concat(todo),
+        todos: todos.concat(todo),
       };
     }
 
