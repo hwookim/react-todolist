@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./App.css";
@@ -7,12 +7,12 @@ import TodoList from "./component/TodoList";
 import TodoFilter from "./component/TodoFilter";
 import { FILTER } from "./utils/filter";
 import { deleteTask, toggleTask } from "./redux/modules/task.actions";
+import { setFilter } from "./redux/modules/filter.actions";
 
 export default function App() {
-  const [filter, setFilter] = useState(FILTER.ALL);
-
-  const { tasks } = useSelector((state) => ({
+  const { tasks, filter } = useSelector((state) => ({
     tasks: state.task.tasks,
+    filter: state.filter.filter,
   }));
   const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ export default function App() {
   };
 
   const handleSelectFilter = (selected) => {
-    setFilter(selected);
+    dispatch(setFilter(selected));
   };
 
   const filterTasks = () => {
