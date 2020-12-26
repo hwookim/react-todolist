@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteTodo, toggleTodo } from "../redux/modules/todo.actions";
 
 export default function TodoListItem({ todo: { id, content, completed } }) {
   const dispatch = useDispatch();
 
-  const [isCompleted, setIsCompleted] = useState(completed);
-
   const getStatus = () => {
-    return isCompleted ? "completed" : "";
+    return completed ? "completed" : "";
   };
 
   const handleToggleTodo = () => {
-    setIsCompleted(!isCompleted);
     dispatch(toggleTodo(id));
   };
 
