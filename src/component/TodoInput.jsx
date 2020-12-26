@@ -1,6 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { createTask } from "../redux/modules/task.actions";
 
-export default function TodoInput({ onInsert }) {
+export default function TodoInput() {
+  const dispatch = useDispatch();
+
   const handleAddTodo = ({ key, target }) => {
     if (key !== "Enter") {
       return;
@@ -11,7 +15,7 @@ export default function TodoInput({ onInsert }) {
       return;
     }
 
-    onInsert(text);
+    dispatch(createTask(text));
     target.value = "";
   };
 

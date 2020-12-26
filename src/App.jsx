@@ -6,11 +6,7 @@ import TodoInput from "./component/TodoInput";
 import TodoList from "./component/TodoList";
 import TodoFilter from "./component/TodoFilter";
 import { FILTER } from "./utils/filter";
-import {
-  createTask,
-  deleteTask,
-  toggleTask,
-} from "./redux/modules/task.actions";
+import { deleteTask, toggleTask } from "./redux/modules/task.actions";
 
 export default function App() {
   const [filter, setFilter] = useState(FILTER.ALL);
@@ -19,10 +15,6 @@ export default function App() {
     tasks: state.task.tasks,
   }));
   const dispatch = useDispatch();
-
-  const handleAddTodo = (content) => {
-    dispatch(createTask(content));
-  };
 
   const handleToggleTodo = (id) => {
     dispatch(toggleTask(id));
@@ -51,7 +43,7 @@ export default function App() {
       <section className="todoapp">
         <div>
           <h1>TODOS</h1>
-          <TodoInput onInsert={handleAddTodo} />
+          <TodoInput />
         </div>
         <div className="main">
           <TodoList
