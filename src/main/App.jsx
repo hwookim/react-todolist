@@ -1,32 +1,35 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./App.css";
 import TodoInput from "./component/TodoInput";
 import TodoList from "./component/TodoList";
 import TodoFilter from "./component/TodoFilter";
 import { FILTER } from "./utils/filter";
+import {
+  createTask,
+  deleteTask,
+  toggleTask,
+} from "./redux/modules/task.actions";
 
 export default function App() {
   const [filter, setFilter] = useState(FILTER.ALL);
-  const [tasks, setTasks] = useState([]);
-  const id = useRef(1);
+
+  const { tasks } = useSelector((state) => ({
+    tasks: state.task.tasks,
+  }));
+  const dispatch = useDispatch();
 
   const handleAddTodo = (content) => {
-    const task = {
-      id: id.current++,
-      content,
-    };
-    setTasks(tasks.concat(task));
+    dispatch(createTask(content));
   };
 
   const handleToggleTodo = (id) => {
-    const target = tasks.find((task) => task.id === id);
-    target.completed = !target.completed;
-    setTasks(tasks);
+    dispatch(toggleTask(id));
   };
 
   const handleDeleteTodo = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    dispatch(deleteTask(id));
   };
 
   const handleSelectFilter = (selected) => {
