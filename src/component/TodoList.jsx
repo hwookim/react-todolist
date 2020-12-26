@@ -6,25 +6,25 @@ import TodoListItem from "./TodoListItem";
 import { FILTER } from "../utils/filter";
 
 export default function TodoList() {
-  const { tasks, filter } = useSelector((state) => ({
-    tasks: state.task.tasks,
+  const { todos, filter } = useSelector((state) => ({
+    todos: state.todo.todos,
     filter: state.filter.filter,
   }));
 
-  const filterTasks = () => {
+  const filterTodos = () => {
     if (filter === FILTER.ACTIVE) {
-      return tasks.filter((task) => !task.completed);
+      return todos.filter((todo) => !todo.completed);
     }
     if (filter === FILTER.COMPLETED) {
-      return tasks.filter((task) => task.completed);
+      return todos.filter((todo) => todo.completed);
     }
-    return tasks;
+    return todos;
   };
 
   return (
     <ul id="todo-list" className="todo-list">
-      {filterTasks().map((task) => (
-        <TodoListItem key={task.id} task={task} />
+      {filterTodos().map((todo) => (
+        <TodoListItem key={todo.id} todo={todo} />
       ))}
     </ul>
   );

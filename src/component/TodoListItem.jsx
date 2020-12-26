@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteTask, toggleTask } from "../redux/modules/task.actions";
+import { deleteTodo, toggleTodo } from "../redux/modules/todo.actions";
 
-export default function TodoListItem({ task: { id, content, completed } }) {
+export default function TodoListItem({ todo: { id, content, completed } }) {
   const dispatch = useDispatch();
 
   const [isCompleted, setIsCompleted] = useState(completed);
@@ -13,11 +13,11 @@ export default function TodoListItem({ task: { id, content, completed } }) {
 
   const handleToggleTodo = () => {
     setIsCompleted(!isCompleted);
-    dispatch(toggleTask(id));
+    dispatch(toggleTodo(id));
   };
 
   const handleDeleteTodo = () => {
-    dispatch(deleteTask(id));
+    dispatch(deleteTodo(id));
   };
 
   return (

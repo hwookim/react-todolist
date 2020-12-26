@@ -3,24 +3,24 @@ import { useSelector } from "react-redux";
 import { FILTER } from "../utils/filter";
 
 export default function TodoCount() {
-  const { tasks, filter } = useSelector((state) => ({
-    tasks: state.task.tasks,
+  const { todos, filter } = useSelector((state) => ({
+    todos: state.todo.todos,
     filter: state.filter.filter,
   }));
 
-  const filterTasks = () => {
+  const filterTodos = () => {
     if (filter === FILTER.ACTIVE) {
-      return tasks.filter((task) => !task.completed);
+      return todos.filter((todo) => !todo.completed);
     }
     if (filter === FILTER.COMPLETED) {
-      return tasks.filter((task) => task.completed);
+      return todos.filter((todo) => todo.completed);
     }
-    return tasks;
+    return todos;
   };
 
   return (
     <span className="todo-count">
-      총 <strong>{filterTasks().length}</strong> 개
+      총 <strong>{filterTodos().length}</strong> 개
     </span>
   );
 }
