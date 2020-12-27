@@ -5,7 +5,7 @@ import { FILTER } from "../utils/filter";
 export default function TodoCount() {
   const { todos, filter } = useSelector((state) => ({
     todos: state.todo.todos,
-    filter: state.filter.filter,
+    filter: state.filter.selected,
   }));
 
   const filterTodos = () => {

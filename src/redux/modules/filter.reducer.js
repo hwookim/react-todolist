@@ -3,7 +3,7 @@ import { SET_FILTER } from "../actions";
 import { FILTER } from "../../utils/filter";
 
 const initialState = {
-  filter: FILTER.ALL,
+  selected: FILTER.ALL,
 };
 
 export default function reducer(state = initialState, action) {
@@ -13,7 +13,7 @@ export default function reducer(state = initialState, action) {
 
       return {
         ...state,
-        filter,
+        selected: filter,
       };
     }
 

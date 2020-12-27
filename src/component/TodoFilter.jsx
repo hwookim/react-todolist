@@ -6,9 +6,7 @@ import TodoFilterItem from "./TodoFilterItem";
 import { FILTER } from "../utils/filter";
 
 export default function TodoFilter() {
-  const { filter: selected } = useSelector((state) => ({
-    filter: state.filter.filter,
-  }));
+  const { selected } = useSelector((state) => state.filter);
 
   return (
     <ul className="filters">
