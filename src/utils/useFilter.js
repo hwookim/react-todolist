@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { FILTER } from "./filter";
 
@@ -7,13 +8,17 @@ export default function useFilter() {
     filter: state.filter.selected,
   }));
 
-  let items = todos;
-  if (filter === FILTER.ACTIVE) {
-    items = todos.filter((todo) => !todo.completed);
-  } else if (filter === FILTER.COMPLETED) {
-    items = todos.filter((todo) => todo.completed);
-  }
+  const items = useMemo(() => filterItems(todos, filter), [todos, filter]);
   return {
     todos: items,
   };
+}
+
+function filterItems(items, filter) {
+  if (filter === FILTER.ACTIVE) {
+    return items.filter((todo) => !todo.completed);
+  } else if (filter === FILTER.COMPLETED) {
+    return items.filter((todo) => todo.completed);
+  }
+  return items;
 }
