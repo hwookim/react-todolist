@@ -1,7 +1,7 @@
 import React from "react";
 import useFilter from "../utils/useFilter";
 
-export default function TodoCount() {
+export default function TodoCounter() {
   const { todos } = useFilter();
 
   return (

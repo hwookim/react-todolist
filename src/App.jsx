@@ -4,7 +4,7 @@ import "./App.css";
 import TodoInput from "./component/TodoInput";
 import TodoList from "./component/TodoList";
 import TodoFilter from "./component/TodoFilter";
-import TodoCount from "./component/TodoCount";
+import TodoCounter from "./component/TodoCounter";
 
 export default function App() {
   return (
@@ -18,7 +18,7 @@ export default function App() {
           <TodoList />
         </div>
         <div className="count-container">
-          <TodoCount />
+          <TodoCounter />
           <TodoFilter />
         </div>
       </section>
