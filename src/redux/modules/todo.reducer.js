@@ -2,7 +2,7 @@ import { CREATE_TODO, DELETE_TODO, SET_TODOS, TOGGLE_TODO } from "../actions";
 
 let nextId = 0;
 const initialState = {
-  todos: [],
+  items: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -12,12 +12,12 @@ export default function reducer(state = initialState, action) {
 
       return {
         ...state,
-        todos,
+        items: todos,
       };
     }
 
     case CREATE_TODO: {
-      const { todos } = state;
+      const { items: todos } = state;
       const { content } = action.payload;
       const todo = {
         id: nextId++,
@@ -27,12 +27,12 @@ export default function reducer(state = initialState, action) {
 
       return {
         ...state,
-        todos: todos.concat(todo),
+        items: todos.concat(todo),
       };
     }
 
     case TOGGLE_TODO: {
-      const { todos } = state;
+      const { items: todos } = state;
       const { id } = action.payload;
 
       const toggle = (todo) => {
@@ -47,16 +47,16 @@ export default function reducer(state = initialState, action) {
 
       return {
         ...state,
-        todos: todos.map(toggle),
+        items: todos.map(toggle),
       };
     }
 
     case DELETE_TODO: {
-      const { todos } = state;
+      const { items: todos } = state;
 
       return {
         ...state,
-        todos: todos.filter((todo) => todo.id !== action.payload.id),
+        items: todos.filter((todo) => todo.id !== action.payload.id),
       };
     }
 

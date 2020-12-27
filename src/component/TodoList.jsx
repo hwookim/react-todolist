@@ -7,7 +7,7 @@ import { FILTER } from "../utils/filter";
 
 export default function TodoList() {
   const { todos, filter } = useSelector((state) => ({
-    todos: state.todo.todos,
+    todos: state.todo.items,
     filter: state.filter.selected,
   }));
 
