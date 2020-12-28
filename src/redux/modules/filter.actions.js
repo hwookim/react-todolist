@@ -1,4 +1,4 @@
-import { SET_FILTER } from "../actions";
+import { SET_FILTER } from "../actionTypes";
 
 export function setFilter(filter) {
   return {

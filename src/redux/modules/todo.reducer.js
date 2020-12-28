@@ -1,4 +1,4 @@
-import { CREATE_TODO, DELETE_TODO, SET_TODOS, TOGGLE_TODO } from "../actions";
+import { CREATE_TODO, DELETE_TODO, SET_TODOS, TOGGLE_TODO } from "../actionTypes";
 
 let nextId = 0;
 const initialState = {
