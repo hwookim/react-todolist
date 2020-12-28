@@ -6,14 +6,10 @@ import TodoListContainer from "./component/TodoListContainer";
 
 export default function App() {
   return (
-    <div className="App">
-      <section className="todoapp">
-        <div>
-          <h1>TODOS</h1>
-          <TodoInputContainer />
-        </div>
-        <TodoListContainer />
-      </section>
-    </div>
+    <section className="todoapp">
+      <h1>TODOS</h1>
+      <TodoInputContainer />
+      <TodoListContainer />
+    </section>
   );
 }
