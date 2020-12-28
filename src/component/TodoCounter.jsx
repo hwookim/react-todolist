@@ -1,9 +1,6 @@
 import React from "react";
-import useFilter from "../utils/useFilter";
 
-export default function TodoCounter() {
-  const { todos } = useFilter();
-
+export default function TodoCounter({ todos }) {
   return (
     <span className="todo-count">
       총 <strong>{todos.length}</strong> 개

@@ -1,13 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 import TodoFilterItem from "./TodoFilterItem";
 
 import { FILTER } from "../utils/filter";
 
-export default function TodoFilter() {
-  const { selected } = useSelector((state) => state.filter);
-
+export default function TodoFilter({ selected, onSelect }) {
   return (
     <ul className="filters">
       {Object.values(FILTER).map((filter) => (
@@ -15,6 +12,7 @@ export default function TodoFilter() {
           key={filter.state}
           filter={filter}
           isSelected={selected === filter}
+          onSelect={onSelect}
         />
       ))}
     </ul>

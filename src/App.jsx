@@ -1,10 +1,8 @@
 import React from "react";
 
 import "./App.css";
-import TodoInput from "./component/TodoInput";
-import TodoList from "./component/TodoList";
-import TodoFilter from "./component/TodoFilter";
-import TodoCounter from "./component/TodoCounter";
+import TodoInputContainer from "./component/TodoInputContainer";
+import TodoListContainer from "./component/TodoListContainer";
 
 export default function App() {
   return (
@@ -12,15 +10,9 @@ export default function App() {
       <section className="todoapp">
         <div>
           <h1>TODOS</h1>
-          <TodoInput />
+          <TodoInputContainer />
         </div>
-        <div className="main">
-          <TodoList />
-        </div>
-        <div className="count-container">
-          <TodoCounter />
-          <TodoFilter />
-        </div>
+        <TodoListContainer />
       </section>
     </div>
   );

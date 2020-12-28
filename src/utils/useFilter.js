@@ -11,6 +11,7 @@ export default function useFilter() {
   const items = useMemo(() => filterItems(todos, filter), [todos, filter]);
   return {
     todos: items,
+    filter,
   };
 }
 

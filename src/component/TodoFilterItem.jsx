@@ -1,20 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { setFilter } from "../redux/modules/filter.actions";
 
 import { findFilterByState } from "../utils/filter";
 
 export default function TodoFilterItem({
   filter: { state, text, href },
   isSelected,
+  onSelect,
 }) {
-  const dispatch = useDispatch();
-
   const className = [state, isSelected ? "selected" : ""].join(" ").trim();
 
   const handleSelectFilter = () => {
     const filter = findFilterByState(state);
-    dispatch(setFilter(filter));
+    onSelect(filter);
   };
 
   return (

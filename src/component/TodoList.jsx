@@ -1,17 +1,34 @@
 import React from "react";
 
 import TodoListItem from "./TodoListItem";
+import TodoCounter from "./TodoCounter";
+import TodoFilter from "./TodoFilter";
 
-import useFilter from "../utils/useFilter";
-
-export default function TodoList() {
-  const { todos } = useFilter();
-
+export default function TodoList({
+  todos,
+  selected,
+  onToggle,
+  onDelete,
+  onSelectFilter,
+}) {
   return (
-    <ul id="todo-list" className="todo-list">
-      {todos.map((todo) => (
-        <TodoListItem key={todo.id} todo={todo} />
-      ))}
-    </ul>
+    <div>
+      <div className="main">
+        <ul id="todo-list" className="todo-list">
+          {todos.map((todo) => (
+            <TodoListItem
+              key={todo.id}
+              todo={todo}
+              onToggle={onToggle}
+              onDelete={onDelete}
+            />
+          ))}
+        </ul>
+      </div>
+      <div className="count-container">
+        <TodoCounter todos={todos} />
+        <TodoFilter selected={selected} onSelect={onSelectFilter} />
+      </div>
+    </div>
   );
 }
