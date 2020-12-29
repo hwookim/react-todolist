@@ -1,26 +1,30 @@
-import { CREATE_TODO, DELETE_TODO, SET_TODOS, TOGGLE_TODO } from "../actionTypes";
+import {
+  CREATE_TODO,
+  DELETE_TODO,
+  SET_TODOS,
+  TOGGLE_TODO,
+} from "../actionTypes";
 
-let nextId = 0;
 const initialState = {
   items: [],
+  nextId: 0,
 };
 
 export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case SET_TODOS: {
+  const actions = {
+    [SET_TODOS]: () => {
       const { todos } = action.payload;
 
       return {
         ...state,
         items: todos,
       };
-    }
-
-    case CREATE_TODO: {
-      const { items: todos } = state;
+    },
+    [CREATE_TODO]: () => {
+      const { items: todos, nextId } = state;
       const { content } = action.payload;
       const todo = {
-        id: nextId++,
+        id: nextId + 1,
         content,
         completed: false,
       };
@@ -28,10 +32,10 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         items: todos.concat(todo),
+        nextId: nextId + 1,
       };
-    }
-
-    case TOGGLE_TODO: {
+    },
+    [TOGGLE_TODO]: () => {
       const { items: todos } = state;
       const { id } = action.payload;
 
@@ -49,19 +53,16 @@ export default function reducer(state = initialState, action) {
         ...state,
         items: todos.map(toggle),
       };
-    }
-
-    case DELETE_TODO: {
+    },
+    [DELETE_TODO]: () => {
       const { items: todos } = state;
 
       return {
         ...state,
         items: todos.filter((todo) => todo.id !== action.payload.id),
       };
-    }
+    },
+  };
 
-    default: {
-      return state;
-    }
-  }
+  return actions[action.type] ? actions[action.type]() : state;
 }
