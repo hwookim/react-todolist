@@ -6,19 +6,8 @@ const initialState = {
   selected: FILTER.ALL,
 };
 
+const actions = [SET_FILTER];
+
 export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case SET_FILTER: {
-      const { filter } = action.payload;
-
-      return {
-        ...state,
-        selected: filter,
-      };
-    }
-
-    default: {
-      return state;
-    }
-  }
+  return actions.includes(action.type) ? action.result(state) : state;
 }
