@@ -1,17 +1,10 @@
-import {
-  CREATE_TODO,
-  DELETE_TODO,
-  SET_TODOS,
-  TOGGLE_TODO,
-} from "../actionTypes";
+const TYPE = "@@todo";
 
 const initialState = {
   items: [],
   nextId: 0,
 };
 
-const actions = [CREATE_TODO, DELETE_TODO, SET_TODOS, TOGGLE_TODO];
-
 export default function reducer(state = initialState, action) {
-  return actions.includes(action.type) ? action.result(state) : state;
+  return action.type.includes(TYPE) ? action.result(state) : state;
 }
