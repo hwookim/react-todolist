@@ -45,4 +45,15 @@ describe("TodoListItem", () => {
 
     expect(onToggle).toBeCalledWith(todo.id);
   });
+
+  it("run onDelete method with click destroy btn", () => {
+    const todo = { id: 0, content: "Let's test", completed: false };
+    const onDelete = jest.fn();
+    const { container } = renderItem({ todo, onDelete });
+    const $destroyBtn = container.querySelector(".destroy");
+
+    fireEvent.click($destroyBtn);
+
+    expect(onDelete).toBeCalledWith(todo.id);
+  });
 });
