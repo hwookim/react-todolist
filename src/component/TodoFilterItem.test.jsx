@@ -1,9 +1,9 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import context from "jest-plugin-context";
 
 import TodoFilterItem from "./TodoFilterItem";
-import { FILTER } from "../utils/filter";
+import { FILTER, findFilterByState } from "../utils/filter";
 
 describe("TodoFilterItem", () => {
   function renderItem({ filter, isSelected, onSelect }) {
@@ -40,5 +40,17 @@ describe("TodoFilterItem", () => {
       expect($btn).toHaveClass(filter.state);
       expect($btn).not.toHaveClass("selected");
     });
+  });
+
+  it("run onSelect method with click btn", () => {
+    const filter = FILTER.ALL;
+    const isSelected = false;
+    const onSelect = jest.fn();
+    const { getByText } = renderItem({ filter, isSelected, onSelect });
+    const $btn = getByText(filter.text);
+
+    fireEvent.click($btn);
+
+    expect(onSelect).toBeCalledWith(findFilterByState(filter.state));
   });
 });
