@@ -1,7 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
 
-import { render } from "@testing-library/react";
 import context from "jest-plugin-context";
 
 import TodoListContainer from "./TodoListContainer";
