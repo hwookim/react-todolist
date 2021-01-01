@@ -2,11 +2,12 @@ import React from "react";
 
 import { fireEvent } from "@testing-library/react";
 import context from "jest-plugin-context";
+import { renderWithMockingRedux } from "../_testUtils/render";
+
+import { deleteTodo, toggleTodo } from "../redux/modules/todo.actions";
 
 import TodoListContainer from "./TodoListContainer";
 import { FILTER } from "../utils/filter";
-import { renderWithMockingRedux } from "../_testUtils/render";
-import { toggleTodo } from "../redux/modules/todo.actions";
 
 jest.mock("react-redux");
 
@@ -48,6 +49,20 @@ describe("TodoListContainer", () => {
       fireEvent.click($toggleBtn);
 
       expect(dispatch).toBeCalledWith(toggleTodo(todos[0].id));
+    });
+  });
+
+  context("click destroy btn", () => {
+    const dispatch = jest.fn();
+    const todos = [{ id: 1, content: "1st Todo", completed: false }];
+
+    it("run deleteTodo action with todo id", () => {
+      const { container } = renderContainer({ todos, dispatch });
+      const $deleteBtn = container.querySelector(".destroy");
+
+      fireEvent.click($deleteBtn);
+
+      expect(dispatch).toBeCalledWith(deleteTodo(todos[0].id));
     });
   });
 });
