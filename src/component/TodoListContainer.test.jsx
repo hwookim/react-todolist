@@ -39,7 +39,7 @@ describe("TodoListContainer", () => {
     });
   });
 
-  context("with a completed todo, a incomplete todo, and active filter", () => {
+  context("with active filter and mixed todos", () => {
     const todos = [
       { id: 1, content: "incomplete", completed: false },
       { id: 2, content: "completed", completed: true },
@@ -54,23 +54,20 @@ describe("TodoListContainer", () => {
     });
   });
 
-  context(
-    "with a completed todo, a incomplete todo, and completed filter",
-    () => {
-      const todos = [
-        { id: 1, content: "incomplete", completed: false },
-        { id: 2, content: "completed", completed: true },
-      ];
-      const filter = FILTER.COMPLETED;
+  context("with completed filter and mixed todos", () => {
+    const todos = [
+      { id: 1, content: "incomplete", completed: false },
+      { id: 2, content: "completed", completed: true },
+    ];
+    const filter = FILTER.COMPLETED;
 
-      it("render only incomplete todo", () => {
-        const { container } = renderContainer({ todos, filter });
+    it("render only incomplete todo", () => {
+      const { container } = renderContainer({ todos, filter });
 
-        expect(container).not.toHaveTextContent("incomplete");
-        expect(container).toHaveTextContent("completed");
-      });
-    },
-  );
+      expect(container).not.toHaveTextContent("incomplete");
+      expect(container).toHaveTextContent("completed");
+    });
+  });
 
   context("click toggle btn", () => {
     const dispatch = jest.fn();
