@@ -29,19 +29,4 @@ describe("App", () => {
 
     expect(container).toHaveTextContent("TODOS");
   });
-
-  context("with todos", () => {
-    const todos = [
-      { id: 1, content: "1st Todo", completed: false },
-      { id: 2, content: "2nd Todo", completed: false },
-    ];
-
-    it("render all todos", () => {
-      const { container } = renderApp({ todos });
-
-      todos.forEach((todo) => {
-        expect(container).toHaveTextContent(todo.content);
-      });
-    });
-  });
 });
