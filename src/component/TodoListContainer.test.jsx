@@ -6,22 +6,15 @@ import context from "jest-plugin-context";
 
 import TodoListContainer from "./TodoListContainer";
 import { FILTER } from "../utils/filter";
+import { renderWithMockingRedux } from "../_testUtils/render";
 
 jest.mock("react-redux");
 
 describe("TodoListContainer", () => {
-  function renderContainer({
-    todos = [],
-    filter = FILTER.ALL,
-    dispatch = jest.fn(),
-  } = {}) {
-    useSelector.mockImplementation(() => ({
-      todos,
-      filter,
-    }));
-    useDispatch.mockImplementation(() => dispatch);
-
-    return render(<TodoListContainer />);
+  function renderContainer({ todos = [], filter = FILTER.ALL } = {}) {
+    return renderWithMockingRedux(<TodoListContainer />, {
+      mockStore: { todos, filter },
+    });
   }
 
   context("with todos", () => {
