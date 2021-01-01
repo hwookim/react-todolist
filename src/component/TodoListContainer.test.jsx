@@ -8,6 +8,7 @@ import { deleteTodo, toggleTodo } from "../redux/modules/todo.actions";
 
 import TodoListContainer from "./TodoListContainer";
 import { FILTER } from "../utils/filter";
+import { setFilter } from "../redux/modules/filter.actions";
 
 jest.mock("react-redux");
 
@@ -63,6 +64,20 @@ describe("TodoListContainer", () => {
       fireEvent.click($deleteBtn);
 
       expect(dispatch).toBeCalledWith(deleteTodo(todos[0].id));
+    });
+  });
+
+  context("click filter btn", () => {
+    const dispatch = jest.fn();
+    const filter = FILTER.ACTIVE;
+
+    it("run deleteTodo action with todo id", () => {
+      const { getByText } = renderContainer({ dispatch });
+      const $filterBtn = getByText(filter.text);
+
+      fireEvent.click($filterBtn);
+
+      expect(dispatch).toBeCalledWith(setFilter(filter));
     });
   });
 });
