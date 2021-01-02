@@ -5,7 +5,7 @@ import context from "jest-plugin-context";
 import { createTodo, setTodos, toggleTodo } from "./todo.actions";
 
 describe("todo reducer", () => {
-  context("with setTodos action", () => {
+  describe("setTodos action", () => {
     const initialState = {
       items: [],
     };
@@ -22,7 +22,7 @@ describe("todo reducer", () => {
     });
   });
 
-  context("with createTodo action", () => {
+  describe("createTodo action", () => {
     const initialState = {
       items: [],
     };
