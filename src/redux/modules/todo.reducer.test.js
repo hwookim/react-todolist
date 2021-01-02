@@ -2,7 +2,7 @@ import reducer from "./todo.reducer";
 
 import context from "jest-plugin-context";
 
-import { createTodo, setTodos } from "./todo.actions";
+import { createTodo, setTodos, toggleTodo } from "./todo.actions";
 
 describe("todo reducer", () => {
   context("with setTodos action", () => {
@@ -35,6 +35,34 @@ describe("todo reducer", () => {
 
       expect(state.items).not.toHaveLength(0);
       expect(todosContents).toContain(newTodoContent);
+    });
+  });
+
+  describe("toggleTodo action", () => {
+    context("with incomplete todo", () => {
+      const incompleteTodo = { id: 0, content: "toggleTodo", completed: false };
+      const initialState = {
+        items: [incompleteTodo],
+      };
+
+      it("complete todo", () => {
+        const state = reducer(initialState, toggleTodo(incompleteTodo.id));
+
+        expect(state.items[0].completed).toBeTruthy();
+      });
+    });
+
+    context("with completed todo", () => {
+      const completedTodo = { id: 0, content: "toggleTodo", completed: true };
+      const initialState = {
+        items: [completedTodo],
+      };
+
+      it("incomplete todo", () => {
+        const state = reducer(initialState, toggleTodo(completedTodo.id));
+
+        expect(state.items[0].completed).toBeFalsy();
+      });
     });
   });
 });
