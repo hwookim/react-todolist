@@ -1,32 +1,41 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
-
-import { deleteTodo, toggleTodo } from "../redux/modules/todo.actions";
-import { setFilter } from "../redux/modules/filter.actions";
-import useFilter from "../utils/useFilter";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { todoState, filteredTodoState } from "../state/todoState";
+import { filterState } from "../state/filterState";
 
 import TodoList from "./TodoList";
 
 export default function TodoListContainer() {
-  const dispatch = useDispatch();
-  const { todos, filter } = useFilter();
+  const [todos, setTodos] = useRecoilState(todoState);
+  const [filter, setFilter] = useRecoilState(filterState);
+  const filteredTodos = useRecoilValue(filteredTodoState);
 
   const handleToggleTodo = (id) => {
-    dispatch(toggleTodo(id));
+    const toggle = (todo) => {
+      if (todo.id !== id) {
+        return todo;
+      }
+      return {
+        ...todo,
+        completed: !todo.completed,
+      };
+    };
+
+    setTodos(todos.map(toggle));
   };
 
   const handleDeleteTodo = (id) => {
-    dispatch(deleteTodo(id));
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   const handleSelectFilter = (filter) => {
-    dispatch(setFilter(filter));
+    setFilter(filter);
   };
 
   return (
     <TodoList
-      todos={todos}
+      todos={filteredTodos}
       selected={filter}
       onToggle={handleToggleTodo}
       onDelete={handleDeleteTodo}

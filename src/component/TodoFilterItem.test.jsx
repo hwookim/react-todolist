@@ -20,7 +20,7 @@ describe("TodoFilterItem", () => {
     const filter = FILTER.ALL;
     const isSelected = true;
 
-    it("render filter btn with selected class", () => {
+    it("render filterState btn with selected class", () => {
       const { getByText } = renderItem({ filter, isSelected });
       const $btn = getByText(filter.text);
 
@@ -33,7 +33,7 @@ describe("TodoFilterItem", () => {
     const filter = FILTER.ALL;
     const isSelected = false;
 
-    it("render filter btn without selected class", () => {
+    it("render filterState btn without selected class", () => {
       const { getByText } = renderItem({ filter, isSelected });
       const $btn = getByText(filter.text);
 

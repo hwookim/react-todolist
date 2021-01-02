@@ -9,7 +9,7 @@ describe("TodoFilter", () => {
     return render(<TodoFilter selected={selected} onSelect={onSelect} />);
   }
 
-  it("render all filter btn", () => {
+  it("render all filterState btn", () => {
     const { container } = renderFilter({ selected: FILTER.ALL });
 
     Object.values(FILTER).forEach((filter) =>

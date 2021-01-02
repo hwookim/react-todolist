@@ -17,13 +17,13 @@ describe("TodoList", () => {
     );
   }
 
-  context("with todos", () => {
+  context("with todoState", () => {
     const todos = [
       { id: 0, content: "1st Todo", completed: false },
       { id: 1, content: "2nd Todo", completed: false },
     ];
 
-    it("render all todos", () => {
+    it("render all todoState", () => {
       const { container } = renderList({ todos });
 
       todos.forEach(({ content }) =>

@@ -9,13 +9,13 @@ describe("TodoCounter", () => {
     return render(<TodoCounter todos={todos} />);
   }
 
-  context("with todos", () => {
+  context("with todoState", () => {
     const todos = [
       { id: 0, content: "1st Todo", completed: false },
       { id: 1, content: "2nd Todo", completed: false },
     ];
 
-    it("render todos length", () => {
+    it("render todoState length", () => {
       const { container } = renderCount({ todos });
 
       expect(container).toHaveTextContent(todos.length.toString());
