@@ -2,7 +2,7 @@ import reducer from "./todo.reducer";
 
 import context from "jest-plugin-context";
 
-import { createTodo, setTodos, toggleTodo } from "./todo.actions";
+import { createTodo, deleteTodo, setTodos, toggleTodo } from "./todo.actions";
 
 describe("todo reducer", () => {
   describe("setTodos action", () => {
@@ -62,6 +62,33 @@ describe("todo reducer", () => {
         const state = reducer(initialState, toggleTodo(completedTodo.id));
 
         expect(state.items[0].completed).toBeFalsy();
+      });
+    });
+  });
+
+  describe("deleteTodo action", () => {
+    const todo = { id: 0, content: "toggleTodo", completed: false };
+    const initialState = {
+      items: [todo],
+    };
+
+    context("with exist id", () => {
+      const existId = todo.id;
+
+      it("remove todo", () => {
+        const state = reducer(initialState, deleteTodo(existId));
+
+        expect(state.items).toHaveLength(initialState.items.length - 1);
+      });
+    });
+
+    context("without exist id", () => {
+      const notExistId = 9999;
+
+      it("doesn't remove todo", () => {
+        const state = reducer(initialState, deleteTodo(notExistId));
+
+        expect(state.items).toHaveLength(initialState.items.length);
       });
     });
   });
