@@ -70,4 +70,17 @@ describe("TodoListContainer", () => {
       expect($todo).toHaveClass("completed");
     });
   });
+
+  context("click destroy btn", () => {
+    const todo = { id: 1, content: "1st Todo", completed: false };
+
+    it("remove todo", () => {
+      const { container } = renderContainer({ todos: [todo] });
+      const $destroyBtn = container.querySelector(".destroy");
+
+      fireEvent.click($destroyBtn);
+
+      expect(container).not.toHaveTextContent(todo.content);
+    });
+  });
 });
