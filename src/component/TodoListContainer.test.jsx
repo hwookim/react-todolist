@@ -1,5 +1,6 @@
 import React from "react";
 
+import { fireEvent } from "@testing-library/react";
 import context from "jest-plugin-context";
 import { renderWithRecoil } from "../_testUtils/render";
 
@@ -53,6 +54,20 @@ describe("TodoListContainer", () => {
 
       expect(container).not.toHaveTextContent("incomplete");
       expect(container).toHaveTextContent("completed");
+    });
+  });
+
+  context("click toggle btn with incomplete todo", () => {
+    const todos = [{ id: 1, content: "1st Todo", completed: false }];
+
+    it("complete todo", () => {
+      const { container } = renderContainer({ todos });
+      const $toggleBtn = container.querySelector(".toggle");
+      const $todo = $toggleBtn.closest("li");
+
+      fireEvent.click($toggleBtn);
+
+      expect($todo).toHaveClass("completed");
     });
   });
 });
