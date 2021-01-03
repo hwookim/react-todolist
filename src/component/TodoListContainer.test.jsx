@@ -48,7 +48,7 @@ describe("TodoListContainer", () => {
     ];
     const filter = FILTER.COMPLETED;
 
-    it("render only incomplete todo", () => {
+    it("render only complete todo", () => {
       const { container } = renderContainer({ todos, filter });
 
       expect(container).not.toHaveTextContent("incomplete");
