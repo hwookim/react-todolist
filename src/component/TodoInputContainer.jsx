@@ -11,7 +11,7 @@ export default function TodoInputContainer() {
 
   const handleAddTodo = (text) => {
     const todo = {
-      id: nextId,
+      id: nextId.current++,
       content: text,
       completed: false,
     };
