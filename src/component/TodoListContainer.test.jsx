@@ -7,6 +7,9 @@ import { renderWithRecoil } from "../_testUtils/render";
 import TodoListContainer from "./TodoListContainer";
 import { FILTER } from "../utils/filter";
 
+const INCOMPLETE_TODO = { id: 1, content: "incomplete", completed: false };
+const COMPLETED_TODO = { id: 2, content: "completed", completed: true };
+
 describe("TodoListContainer", () => {
   function renderContainer({ todos = [], filter = FILTER.ALL } = {}) {
     return renderWithRecoil(<TodoListContainer />, { todos, filter });
@@ -28,32 +31,26 @@ describe("TodoListContainer", () => {
   });
 
   context("with active filter and mixed todos", () => {
-    const todos = [
-      { id: 1, content: "incomplete", completed: false },
-      { id: 2, content: "completed", completed: true },
-    ];
+    const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
     const filter = FILTER.ACTIVE;
 
     it("render only incomplete todo", () => {
       const { container } = renderContainer({ todos, filter });
 
-      expect(container).toHaveTextContent("incomplete");
-      expect(container).not.toHaveTextContent("completed");
+      expect(container).toHaveTextContent(INCOMPLETE_TODO.content);
+      expect(container).not.toHaveTextContent(COMPLETED_TODO.content);
     });
   });
 
   context("with completed filter and mixed todos", () => {
-    const todos = [
-      { id: 1, content: "incomplete", completed: false },
-      { id: 2, content: "completed", completed: true },
-    ];
+    const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
     const filter = FILTER.COMPLETED;
 
     it("render only complete todo", () => {
       const { container } = renderContainer({ todos, filter });
 
-      expect(container).not.toHaveTextContent("incomplete");
-      expect(container).toHaveTextContent("completed");
+      expect(container).not.toHaveTextContent(INCOMPLETE_TODO.content);
+      expect(container).toHaveTextContent(COMPLETED_TODO.content);
     });
   });
 
@@ -81,6 +78,36 @@ describe("TodoListContainer", () => {
       fireEvent.click($destroyBtn);
 
       expect(container).not.toHaveTextContent(todo.content);
+    });
+  });
+
+  context("click completed filter with mixed todos", () => {
+    const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
+    const filter = FILTER.COMPLETED;
+
+    it("render only complete todo", () => {
+      const { container, getByText } = renderContainer({ todos });
+      const $completedFilterBtn = getByText(filter.text);
+
+      fireEvent.click($completedFilterBtn);
+
+      expect(container).not.toHaveTextContent(INCOMPLETE_TODO.content);
+      expect(container).toHaveTextContent(COMPLETED_TODO.content);
+    });
+  });
+
+  context("click active filter with mixed todos", () => {
+    const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
+    const filter = FILTER.ACTIVE;
+
+    it("render only complete todo", () => {
+      const { container, getByText } = renderContainer({ todos });
+      const $activeFilterBtn = getByText(filter.text);
+
+      fireEvent.click($activeFilterBtn);
+
+      expect(container).toHaveTextContent(INCOMPLETE_TODO.content);
+      expect(container).not.toHaveTextContent(COMPLETED_TODO.content);
     });
   });
 });
