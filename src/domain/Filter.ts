@@ -1,14 +1,8 @@
 export default class Filter {
-  constructor(
-    private state: string,
-    private text: string,
-    private href: string,
-  ) {}
+  constructor(private state: string, private text: string, private href: string) {}
 
   public static findFilter(target: Filter) {
-    return Object.values(FILTER).find((filter: Filter) =>
-      filter.isSame(target),
-    );
+    return Object.values(FILTER).find((filter: Filter) => filter.isSame(target));
   }
 
   private isSame(target: Filter) {

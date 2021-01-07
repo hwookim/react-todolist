@@ -8,9 +8,7 @@ export interface Props {
 }
 
 const TodoFilterItem: React.FC<Props> = ({ filter, isSelected, onSelect }) => {
-  const className = [filter.getState(), isSelected ? "selected" : ""]
-    .join(" ")
-    .trim();
+  const className = [filter.getState(), isSelected ? "selected" : ""].join(" ").trim();
 
   const handleSelectFilter = () => {
     const selected = Filter.findFilter(filter);
@@ -19,10 +17,7 @@ const TodoFilterItem: React.FC<Props> = ({ filter, isSelected, onSelect }) => {
 
   return (
     <li>
-      <a
-        className={className}
-        href={filter.getHref()}
-        onClick={handleSelectFilter}>
+      <a className={className} href={filter.getHref()} onClick={handleSelectFilter}>
         {filter.getText()}
       </a>
     </li>

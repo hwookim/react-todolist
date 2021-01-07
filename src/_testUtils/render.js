@@ -19,7 +19,8 @@ export function renderWithRecoil(
       initializeState={({ set }) => {
         set(todoState, todos);
         set(filterState, filter);
-      }}>
+      }}
+    >
       {ui}
     </RecoilRoot>,
   );

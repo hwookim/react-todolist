@@ -1,10 +1,6 @@
 import React from "react";
 
-export default function TodoListItem({
-  todo: { id, content, completed },
-  onToggle,
-  onDelete,
-}) {
+export default function TodoListItem({ todo: { id, content, completed }, onToggle, onDelete }) {
   const getStatus = () => {
     return completed ? "completed" : "";
   };

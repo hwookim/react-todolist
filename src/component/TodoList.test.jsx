@@ -26,9 +26,7 @@ describe("TodoList", () => {
     it("render all todoState", () => {
       const { container } = renderList({ todos });
 
-      todos.forEach(({ content }) =>
-        expect(container).toHaveTextContent(content),
-      );
+      todos.forEach(({ content }) => expect(container).toHaveTextContent(content));
     });
   });
 });

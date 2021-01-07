@@ -6,9 +6,7 @@ import TodoListItem from "./TodoListItem";
 
 describe("TodoListItem", () => {
   function renderItem({ todo, onToggle, onDelete }) {
-    return render(
-      <TodoListItem todo={todo} onToggle={onToggle} onDelete={onDelete} />,
-    );
+    return render(<TodoListItem todo={todo} onToggle={onToggle} onDelete={onDelete} />);
   }
 
   context("with incomplete todo", () => {

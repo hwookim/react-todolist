@@ -9,13 +9,7 @@ import { Props } from "./TodoFilterItem";
 
 describe("TodoFilterItem", () => {
   function renderItem({ filter, isSelected, onSelect }: Props) {
-    return render(
-      <TodoFilterItem
-        filter={filter}
-        isSelected={isSelected}
-        onSelect={onSelect}
-      />,
-    );
+    return render(<TodoFilterItem filter={filter} isSelected={isSelected} onSelect={onSelect} />);
   }
 
   context("when selected", () => {
