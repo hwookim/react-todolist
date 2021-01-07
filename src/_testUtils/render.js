@@ -5,7 +5,7 @@ import { filterState } from "../state/filterState";
 
 import { render } from "@testing-library/react";
 
-import { FILTER } from "../utils/filter";
+import { FILTER } from "../domain/Filter";
 
 export function renderWithRecoil(
   ui,

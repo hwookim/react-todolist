@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { FILTER } from "../utils/filter";
+import { FILTER } from "../domain/Filter";
 
 export const filterState = atom({
   key: "filterState",

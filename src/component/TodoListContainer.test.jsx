@@ -5,7 +5,7 @@ import context from "jest-plugin-context";
 import { renderWithRecoil } from "../_testUtils/render";
 
 import TodoListContainer from "./TodoListContainer";
-import { FILTER } from "../utils/filter";
+import { FILTER } from "../domain/Filter";
 
 const INCOMPLETE_TODO = { id: 1, content: "incomplete", completed: false };
 const COMPLETED_TODO = { id: 2, content: "completed", completed: true };
@@ -87,7 +87,7 @@ describe("TodoListContainer", () => {
 
     it("render only complete todo", () => {
       const { container, getByText } = renderContainer({ todos });
-      const $completedFilterBtn = getByText(filter.text);
+      const $completedFilterBtn = getByText(filter.getText());
 
       fireEvent.click($completedFilterBtn);
 
@@ -102,7 +102,7 @@ describe("TodoListContainer", () => {
 
     it("render only complete todo", () => {
       const { container, getByText } = renderContainer({ todos });
-      const $activeFilterBtn = getByText(filter.text);
+      const $activeFilterBtn = getByText(filter.getText());
 
       fireEvent.click($activeFilterBtn);
 

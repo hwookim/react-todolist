@@ -1,7 +1,6 @@
 import { atom, selector } from "recoil";
 import { filterState } from "./filterState";
-
-import { FILTER } from "../utils/filter";
+import { FILTER } from "../domain/Filter";
 
 export const todoState = atom({
   key: "todoState",

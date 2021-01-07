@@ -1,12 +1,14 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
+// @ts-ignore
 import context from "jest-plugin-context";
 
 import TodoFilterItem from "./TodoFilterItem";
-import { FILTER, findFilterByState } from "../utils/filter";
+import Filter, { FILTER } from "../domain/Filter";
+import { Props } from "./TodoFilterItem";
 
 describe("TodoFilterItem", () => {
-  function renderItem({ filter, isSelected, onSelect }) {
+  function renderItem({ filter, isSelected, onSelect }: Props) {
     return render(
       <TodoFilterItem
         filter={filter}
@@ -19,12 +21,17 @@ describe("TodoFilterItem", () => {
   context("when selected", () => {
     const filter = FILTER.ALL;
     const isSelected = true;
+    const onSelect = jest.fn();
 
     it("render filterState btn with selected class", () => {
-      const { getByText } = renderItem({ filter, isSelected });
-      const $btn = getByText(filter.text);
+      const { getByText } = renderItem({
+        filter,
+        isSelected,
+        onSelect,
+      });
+      const $btn = getByText(filter.getText());
 
-      expect($btn).toHaveClass(filter.state);
+      expect($btn).toHaveClass(filter.getState());
       expect($btn).toHaveClass("selected");
     });
   });
@@ -32,12 +39,13 @@ describe("TodoFilterItem", () => {
   context("when not selected", () => {
     const filter = FILTER.ALL;
     const isSelected = false;
+    const onSelect = jest.fn();
 
     it("render filterState btn without selected class", () => {
-      const { getByText } = renderItem({ filter, isSelected });
-      const $btn = getByText(filter.text);
+      const { getByText } = renderItem({ filter, isSelected, onSelect });
+      const $btn = getByText(filter.getText());
 
-      expect($btn).toHaveClass(filter.state);
+      expect($btn).toHaveClass(filter.getState());
       expect($btn).not.toHaveClass("selected");
     });
   });
@@ -47,10 +55,10 @@ describe("TodoFilterItem", () => {
     const isSelected = false;
     const onSelect = jest.fn();
     const { getByText } = renderItem({ filter, isSelected, onSelect });
-    const $btn = getByText(filter.text);
+    const $btn = getByText(filter.getText());
 
     fireEvent.click($btn);
 
-    expect(onSelect).toBeCalledWith(findFilterByState(filter.state));
+    expect(onSelect).toBeCalledWith(Filter.findFilter(filter));
   });
 });

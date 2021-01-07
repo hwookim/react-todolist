@@ -2,14 +2,19 @@ import React from "react";
 
 import TodoFilterItem from "./TodoFilterItem";
 
-import { FILTER } from "../utils/filter";
+import Filter, { FILTER } from "../domain/Filter";
 
-export default function TodoFilter({ selected, onSelect }) {
+export interface Props {
+  selected: Filter;
+  onSelect: Function;
+}
+
+const TodoFilter: React.FC<Props> = ({ selected, onSelect }) => {
   return (
     <ul className="filters">
       {Object.values(FILTER).map((filter) => (
         <TodoFilterItem
-          key={filter.state}
+          key={filter.getState()}
           filter={filter}
           isSelected={selected === filter}
           onSelect={onSelect}
@@ -17,4 +22,6 @@ export default function TodoFilter({ selected, onSelect }) {
       ))}
     </ul>
   );
-}
+};
+
+export default TodoFilter;
