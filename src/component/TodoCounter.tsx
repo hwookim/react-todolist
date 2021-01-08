@@ -2,7 +2,7 @@ import React from "react";
 import Todo from "../domain/Todo";
 
 export interface Props {
-  todos: Array<Todo>;
+  todos: Todo[];
 }
 
 const TodoCounter: React.FC<Props> = ({ todos }) => {

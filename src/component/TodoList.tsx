@@ -3,14 +3,24 @@ import React from "react";
 import TodoListItem from "./TodoListItem";
 import TodoCounter from "./TodoCounter";
 import TodoFilter from "./TodoFilter";
+import Todo from "../domain/Todo";
+import Filter from "../domain/Filter";
 
-export default function TodoList({ todos, selected, onToggle, onDelete, onSelectFilter }) {
+export interface Props {
+  todos: Todo[];
+  selected: Filter;
+  onToggle: (todo: Todo) => void;
+  onDelete: (todo: Todo) => void;
+  onSelectFilter: (filter: Filter) => void;
+}
+
+const TodoList: React.FC<Props> = ({ todos, selected, onToggle, onDelete, onSelectFilter }) => {
   return (
     <div>
       <div className="main">
         <ul id="todo-list" className="todo-list">
           {todos.map((todo) => (
-            <TodoListItem key={todo.id} todo={todo} onToggle={onToggle} onDelete={onDelete} />
+            <TodoListItem key={todo.getId()} todo={todo} onToggle={onToggle} onDelete={onDelete} />
           ))}
         </ul>
       </div>
@@ -20,4 +30,6 @@ export default function TodoList({ todos, selected, onToggle, onDelete, onSelect
       </div>
     </div>
   );
-}
+};
+
+export default TodoList;

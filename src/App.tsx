@@ -4,7 +4,7 @@ import "./App.css";
 import TodoInputContainer from "./component/TodoInputContainer";
 import TodoListContainer from "./component/TodoListContainer";
 
-export default function App() {
+const App: React.FC = () => {
   return (
     <section className="todoapp">
       <h1>TODOS</h1>
@@ -12,4 +12,6 @@ export default function App() {
       <TodoListContainer />
     </section>
   );
-}
+};
+
+export default App;

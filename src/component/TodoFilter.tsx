@@ -4,9 +4,11 @@ import TodoFilterItem from "./TodoFilterItem";
 
 import Filter, { FILTER } from "../domain/Filter";
 
+type OnSelect = (filter: Filter) => void;
+
 export interface Props {
   selected: Filter;
-  onSelect: Function;
+  onSelect: OnSelect;
 }
 
 const TodoFilter: React.FC<Props> = ({ selected, onSelect }) => {

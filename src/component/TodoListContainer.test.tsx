@@ -1,8 +1,7 @@
 import React from "react";
 
 import { fireEvent, RenderResult } from "@testing-library/react";
-import context from "jest-plugin-context";
-import { renderWithRecoil } from "../_testUtils/render";
+import { RecoilProps, renderWithRecoil } from "../_testUtils/render";
 
 import TodoListContainer from "./TodoListContainer";
 import Filter, { FILTER } from "../domain/Filter";
@@ -12,15 +11,15 @@ const INCOMPLETE_TODO: Todo = new Todo(1, "incomplete", false);
 const COMPLETED_TODO: Todo = new Todo(2, "completed", true);
 
 describe("TodoListContainer", () => {
-  function renderContainer({ todos = [], filter = FILTER.ALL } = {}) {
+  function renderContainer({ todos, filter = FILTER.ALL }: RecoilProps): RenderResult {
     return renderWithRecoil(<TodoListContainer />, { todos, filter });
   }
 
-  context("with todos", () => {
-    const todos: Array<Todo> = [new Todo(1, "1st Todo", false), new Todo(2, "2nd Todo", false)];
+  describe("with todos", () => {
+    const todos = [new Todo(1, "1st Todo", false), new Todo(2, "2nd Todo", false)];
 
     it("render all todos", () => {
-      const { container }: RenderResult = renderContainer({ todos });
+      const { container } = renderContainer({ todos });
 
       todos.forEach((todo) => {
         expect(container).toHaveTextContent(todo.getContent());
@@ -28,37 +27,37 @@ describe("TodoListContainer", () => {
     });
   });
 
-  context("with active filter and mixed todos", () => {
-    const todos: Array<Todo> = [INCOMPLETE_TODO, COMPLETED_TODO];
-    const filter: Filter = FILTER.ACTIVE;
+  describe("with active filter and mixed todos", () => {
+    const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
+    const filter = FILTER.ACTIVE;
 
     it("render only incomplete todo", () => {
-      const { container }: RenderResult = renderContainer({ todos, filter });
+      const { container } = renderContainer({ todos, filter });
 
       expect(container).toHaveTextContent(INCOMPLETE_TODO.getContent());
       expect(container).not.toHaveTextContent(COMPLETED_TODO.getContent());
     });
   });
 
-  context("with completed filter and mixed todos", () => {
-    const todos: Array<Todo> = [INCOMPLETE_TODO, COMPLETED_TODO];
-    const filter: Filter = FILTER.COMPLETED;
+  describe("with completed filter and mixed todos", () => {
+    const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
+    const filter = FILTER.COMPLETED;
 
     it("render only complete todo", () => {
-      const { container }: RenderResult = renderContainer({ todos, filter });
+      const { container } = renderContainer({ todos, filter });
 
       expect(container).not.toHaveTextContent(INCOMPLETE_TODO.getContent());
       expect(container).toHaveTextContent(COMPLETED_TODO.getContent());
     });
   });
 
-  context("click toggle btn with incomplete todo", () => {
-    const todos: Array<Todo> = [new Todo(1, "1st Todo", false)];
+  describe("click toggle btn with incomplete todo", () => {
+    const todos = [new Todo(1, "1st Todo", false)];
 
     it("complete todo", () => {
-      const { container }: RenderResult = renderContainer({ todos });
-      const $toggleBtn: HTMLElement = container.querySelector(".toggle");
-      const $todo: HTMLElement = $toggleBtn.closest("li");
+      const { container } = renderContainer({ todos });
+      const $toggleBtn = container.querySelector(".toggle") as HTMLElement;
+      const $todo = $toggleBtn.closest("li") as HTMLElement;
 
       fireEvent.click($toggleBtn);
 
@@ -66,12 +65,12 @@ describe("TodoListContainer", () => {
     });
   });
 
-  context("click destroy btn", () => {
-    const todo: Todo = new Todo(1, "1st Todo", false);
+  describe("click destroy btn", () => {
+    const todo = new Todo(1, "1st Todo", false);
 
     it("remove todo", () => {
-      const { container }: RenderResult = renderContainer({ todos: [todo] });
-      const $destroyBtn: HTMLElement = container.querySelector(".destroy");
+      const { container } = renderContainer({ todos: [todo] });
+      const $destroyBtn = container.querySelector(".destroy") as HTMLElement;
 
       fireEvent.click($destroyBtn);
 
@@ -79,9 +78,9 @@ describe("TodoListContainer", () => {
     });
   });
 
-  context("click completed filter with mixed todos", () => {
-    const todos: Array<Todo> = [INCOMPLETE_TODO, COMPLETED_TODO];
-    const filter: Filter = FILTER.COMPLETED;
+  describe("click completed filter with mixed todos", () => {
+    const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
+    const filter = FILTER.COMPLETED;
 
     it("render only complete todo", () => {
       const { container, getByText }: RenderResult = renderContainer({ todos });
@@ -94,13 +93,13 @@ describe("TodoListContainer", () => {
     });
   });
 
-  context("click active filter with mixed todos", () => {
-    const todos: Array<Todo> = [INCOMPLETE_TODO, COMPLETED_TODO];
-    const filter: Filter = FILTER.ACTIVE;
+  describe("click active filter with mixed todos", () => {
+    const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
+    const filter = FILTER.ACTIVE;
 
     it("render only complete todo", () => {
-      const { container, getByText }: RenderResult = renderContainer({ todos });
-      const $activeFilterBtn: HTMLElement = getByText(filter.getText());
+      const { container, getByText } = renderContainer({ todos });
+      const $activeFilterBtn = getByText(filter.getText());
 
       fireEvent.click($activeFilterBtn);
 

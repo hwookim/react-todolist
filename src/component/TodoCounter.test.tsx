@@ -5,15 +5,15 @@ import TodoCounter, { Props } from "./TodoCounter";
 import Todo from "../domain/Todo";
 
 describe("TodoCounter", () => {
-  function renderCount({ todos }: Props) {
+  function renderCount({ todos }: Props): RenderResult {
     return render(<TodoCounter todos={todos} />);
   }
 
   describe("with todoState", () => {
-    const todos: Array<Todo> = [new Todo(0, "1st Todo", false), new Todo(1, "2nd Todo", false)];
+    const todos = [new Todo(0, "1st Todo", false), new Todo(1, "2nd Todo", false)];
 
     it("render todoState length", () => {
-      const { container }: RenderResult = renderCount({ todos });
+      const { container } = renderCount({ todos });
 
       expect(container).toHaveTextContent(todos.length.toString());
     });

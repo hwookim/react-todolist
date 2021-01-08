@@ -1,27 +1,28 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-// @ts-ignore
-import context from "jest-plugin-context";
+import { render, fireEvent, RenderResult } from "@testing-library/react";
 
 import TodoFilterItem from "./TodoFilterItem";
 import Filter, { FILTER } from "../domain/Filter";
-import { Props } from "./TodoFilterItem";
+
+interface Props {
+  filter: Filter;
+  isSelected: boolean;
+  onSelect?: () => void;
+}
 
 describe("TodoFilterItem", () => {
-  function renderItem({ filter, isSelected, onSelect }: Props) {
+  function renderItem({ filter, isSelected, onSelect = jest.fn() }: Props): RenderResult {
     return render(<TodoFilterItem filter={filter} isSelected={isSelected} onSelect={onSelect} />);
   }
 
-  context("when selected", () => {
+  describe("when selected", () => {
     const filter = FILTER.ALL;
     const isSelected = true;
-    const onSelect = jest.fn();
 
     it("render filterState btn with selected class", () => {
       const { getByText } = renderItem({
         filter,
         isSelected,
-        onSelect,
       });
       const $btn = getByText(filter.getText());
 
@@ -30,13 +31,12 @@ describe("TodoFilterItem", () => {
     });
   });
 
-  context("when not selected", () => {
+  describe("when not selected", () => {
     const filter = FILTER.ALL;
     const isSelected = false;
-    const onSelect = jest.fn();
 
     it("render filterState btn without selected class", () => {
-      const { getByText } = renderItem({ filter, isSelected, onSelect });
+      const { getByText } = renderItem({ filter, isSelected });
       const $btn = getByText(filter.getText());
 
       expect($btn).toHaveClass(filter.getState());
@@ -48,6 +48,7 @@ describe("TodoFilterItem", () => {
     const filter = FILTER.ALL;
     const isSelected = false;
     const onSelect = jest.fn();
+
     const { getByText } = renderItem({ filter, isSelected, onSelect });
     const $btn = getByText(filter.getText());
 
