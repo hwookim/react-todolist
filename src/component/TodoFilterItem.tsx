@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Filter from "../domain/Filter";
 
 type OnSelect = (filter: Filter) => void;
@@ -12,10 +12,10 @@ export interface Props {
 const TodoFilterItem: React.FC<Props> = ({ filter, isSelected, onSelect }) => {
   const className: string = [filter.getState(), isSelected ? "selected" : ""].join(" ").trim();
 
-  const handleSelectFilter = (): void => {
+  const handleSelectFilter = useCallback((): void => {
     const selected = Filter.findFilter(filter);
     onSelect(selected);
-  };
+  }, []);
 
   return (
     <li>

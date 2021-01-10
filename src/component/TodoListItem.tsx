@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Todo from "../domain/Todo";
 
 export interface Props {
@@ -8,9 +8,9 @@ export interface Props {
 }
 
 const TodoListItem: React.FC<Props> = ({ todo, onToggle, onDelete }) => {
-  const getStatus = (): string => {
+  const getStatus = useCallback((): string => {
     return todo.isCompleted() ? "completed" : "";
-  };
+  }, [todo.isCompleted()]);
 
   return (
     <li className={getStatus()} data-id={todo.getId()}>

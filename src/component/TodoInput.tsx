@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 type OnAdd = (text: string) => void;
 
@@ -9,22 +9,28 @@ export interface Props {
 const TodoInput: React.FC<Props> = ({ onAdd }) => {
   const [value, setValue] = useState<string>("");
 
-  const handleChangeValue = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-    setValue(target.value);
-  };
+  const handleChangeValue = useCallback(
+    ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+      setValue(target.value);
+    },
+    [value],
+  );
 
-  const handleAddTodo = ({ key }: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (key !== "Enter") {
-      return;
-    }
+  const handleAddTodo = useCallback(
+    ({ key }: React.KeyboardEvent<HTMLInputElement>): void => {
+      if (key !== "Enter") {
+        return;
+      }
 
-    if (value.trim() === "") {
-      return;
-    }
+      if (value.trim() === "") {
+        return;
+      }
 
-    onAdd(value);
-    setValue("");
-  };
+      onAdd(value);
+      setValue("");
+    },
+    [value],
+  );
 
   return (
     <input
