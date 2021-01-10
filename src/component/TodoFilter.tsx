@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 
 import TodoFilterItem from "./TodoFilterItem";
 
@@ -12,18 +12,18 @@ export interface Props {
 }
 
 const TodoFilter: React.FC<Props> = ({ selected, onSelect }) => {
-  return (
-    <ul className="filters">
-      {Object.values(Filter.getFilters()).map((filter) => (
-        <TodoFilterItem
-          key={filter.getState()}
-          filter={filter}
-          isSelected={selected === filter}
-          onSelect={onSelect}
-        />
-      ))}
-    </ul>
-  );
+  const todoFilterItems = useMemo<JSX.Element[]>(() => {
+    return Object.values(Filter.getFilters()).map((filter) => (
+      <TodoFilterItem
+        key={filter.getState()}
+        filter={filter}
+        isSelected={selected === filter}
+        onSelect={onSelect}
+      />
+    ));
+  }, [selected]);
+
+  return <ul className="filters">{todoFilterItems}</ul>;
 };
 
 export default TodoFilter;

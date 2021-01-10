@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import TodoListItem from "./TodoListItem";
 import TodoCounter from "./TodoCounter";
@@ -15,13 +15,17 @@ export interface Props {
 }
 
 const TodoList: React.FC<Props> = ({ todos, selected, onToggle, onDelete, onSelectFilter }) => {
+  const todoItems = useMemo<JSX.Element[]>(() => {
+    return todos.map((todo) => (
+      <TodoListItem key={todo.getId()} todo={todo} onToggle={onToggle} onDelete={onDelete} />
+    ));
+  }, [todos, selected]);
+
   return (
     <div>
       <div className="main">
         <ul id="todo-list" className="todo-list">
-          {todos.map((todo) => (
-            <TodoListItem key={todo.getId()} todo={todo} onToggle={onToggle} onDelete={onDelete} />
-          ))}
+          {todoItems}
         </ul>
       </div>
       <div className="count-container">
