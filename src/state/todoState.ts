@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 import { filterState } from "./filterState";
-import Filter, { FILTER } from "../domain/Filter";
+import Filter from "../domain/Filter";
 import Todo from "../domain/Todo";
 
 export const todoState = atom<Todo[]>({
@@ -15,9 +15,9 @@ export const filteredTodoState = selector<Todo[]>({
     const filter: Filter = get(filterState);
 
     switch (filter) {
-      case FILTER.ACTIVE:
+      case Filter.ACTIVE:
         return todos.filter((item: Todo) => !item.isCompleted());
-      case FILTER.COMPLETED:
+      case Filter.COMPLETED:
         return todos.filter((item: Todo) => item.isCompleted());
       default:
         return todos;

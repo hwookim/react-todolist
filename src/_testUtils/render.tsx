@@ -5,7 +5,7 @@ import { filterState } from "../state/filterState";
 
 import { render, RenderResult } from "@testing-library/react";
 
-import Filter, { FILTER } from "../domain/Filter";
+import Filter from "../domain/Filter";
 import Todo from "../domain/Todo";
 
 export interface RecoilProps {
@@ -15,7 +15,7 @@ export interface RecoilProps {
 
 const renderWithRecoil = (
   ui: JSX.Element,
-  { todos = [], filter = FILTER.ALL }: RecoilProps = { todos: [], filter: FILTER.ALL },
+  { todos = [], filter = Filter.ALL }: RecoilProps = { todos: [], filter: Filter.ALL },
 ): RenderResult => {
   return render(
     <RecoilRoot

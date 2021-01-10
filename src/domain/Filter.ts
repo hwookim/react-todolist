@@ -1,8 +1,21 @@
 export default class Filter {
+  public static ALL = new Filter("all", "전체보기", "/#");
+  public static ACTIVE = new Filter("active", "해야할 일", "/#active");
+  public static COMPLETED = new Filter("completed", "완료한 일", "/#completed");
+
   constructor(private state: string, private text: string, private href: string) {}
 
+  public static getFilters(): { ALL: Filter; ACTIVE: Filter; COMPLETED: Filter } {
+    return {
+      ALL: this.ALL,
+      ACTIVE: this.ACTIVE,
+      COMPLETED: this.COMPLETED,
+    };
+  }
+
   public static findFilter(target: Filter): Filter {
-    return <Filter>Object.values(FILTER).find((filter: Filter) => filter.isSame(target));
+    const filters = this.getFilters();
+    return <Filter>Object.values(filters).find((filter: Filter) => filter.isSame(target));
   }
 
   private isSame(target: Filter): boolean {
@@ -21,15 +34,3 @@ export default class Filter {
     return this.href;
   }
 }
-
-const ALL = new Filter("all", "전체보기", "/#");
-const ACTIVE = new Filter("active", "해야할 일", "/#active");
-const COMPLETED = new Filter("completed", "완료한 일", "/#completed");
-
-const FILTER = {
-  ALL,
-  ACTIVE,
-  COMPLETED,
-};
-
-export { FILTER };

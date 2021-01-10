@@ -4,14 +4,14 @@ import { fireEvent, RenderResult } from "@testing-library/react";
 import { RecoilProps, renderWithRecoil } from "../_testUtils/render";
 
 import TodoListContainer from "./TodoListContainer";
-import Filter, { FILTER } from "../domain/Filter";
+import Filter from "../domain/Filter";
 import Todo from "../domain/Todo";
 
 const INCOMPLETE_TODO: Todo = new Todo(1, "incomplete", false);
 const COMPLETED_TODO: Todo = new Todo(2, "completed", true);
 
 describe("TodoListContainer", () => {
-  function renderContainer({ todos, filter = FILTER.ALL }: RecoilProps): RenderResult {
+  function renderContainer({ todos, filter = Filter.ALL }: RecoilProps): RenderResult {
     return renderWithRecoil(<TodoListContainer />, { todos, filter });
   }
 
@@ -29,7 +29,7 @@ describe("TodoListContainer", () => {
 
   describe("with active filter and mixed todos", () => {
     const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
-    const filter = FILTER.ACTIVE;
+    const filter = Filter.ACTIVE;
 
     it("render only incomplete todo", () => {
       const { container } = renderContainer({ todos, filter });
@@ -41,7 +41,7 @@ describe("TodoListContainer", () => {
 
   describe("with completed filter and mixed todos", () => {
     const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
-    const filter = FILTER.COMPLETED;
+    const filter = Filter.COMPLETED;
 
     it("render only complete todo", () => {
       const { container } = renderContainer({ todos, filter });
@@ -80,7 +80,7 @@ describe("TodoListContainer", () => {
 
   describe("click completed filter with mixed todos", () => {
     const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
-    const filter = FILTER.COMPLETED;
+    const filter = Filter.COMPLETED;
 
     it("render only complete todo", () => {
       const { container, getByText }: RenderResult = renderContainer({ todos });
@@ -95,7 +95,7 @@ describe("TodoListContainer", () => {
 
   describe("click active filter with mixed todos", () => {
     const todos = [INCOMPLETE_TODO, COMPLETED_TODO];
-    const filter = FILTER.ACTIVE;
+    const filter = Filter.ACTIVE;
 
     it("render only complete todo", () => {
       const { container, getByText } = renderContainer({ todos });

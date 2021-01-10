@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent, RenderResult } from "@testing-library/react";
 
 import TodoFilterItem from "./TodoFilterItem";
-import Filter, { FILTER } from "../domain/Filter";
+import Filter from "../domain/Filter";
 
 interface Props {
   filter: Filter;
@@ -16,7 +16,7 @@ describe("TodoFilterItem", () => {
   }
 
   describe("when selected", () => {
-    const filter = FILTER.ALL;
+    const filter = Filter.ALL;
     const isSelected = true;
 
     it("render filterState btn with selected class", () => {
@@ -32,7 +32,7 @@ describe("TodoFilterItem", () => {
   });
 
   describe("when not selected", () => {
-    const filter = FILTER.ALL;
+    const filter = Filter.ALL;
     const isSelected = false;
 
     it("render filterState btn without selected class", () => {
@@ -45,7 +45,7 @@ describe("TodoFilterItem", () => {
   });
 
   it("run onSelect method with click btn", () => {
-    const filter = FILTER.ALL;
+    const filter = Filter.ALL;
     const isSelected = false;
     const onSelect = jest.fn();
 

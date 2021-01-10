@@ -3,7 +3,7 @@ import { render, RenderResult } from "@testing-library/react";
 
 import TodoList from "./TodoList";
 import Todo from "../domain/Todo";
-import Filter, { FILTER } from "../domain/Filter";
+import Filter from "../domain/Filter";
 
 interface Props {
   todos: Todo[];
@@ -16,7 +16,7 @@ interface Props {
 describe("TodoList", () => {
   function renderList({
     todos,
-    selected = FILTER.ALL,
+    selected = Filter.ALL,
     onToggle = jest.fn(),
     onDelete = jest.fn(),
     onSelectFilter = jest.fn,
