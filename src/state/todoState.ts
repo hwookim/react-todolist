@@ -3,15 +3,15 @@ import { filterState } from "./filterState";
 import Filter, { FILTER } from "../domain/Filter";
 import Todo from "../domain/Todo";
 
-export const todoState = atom<Array<Todo>>({
+export const todoState = atom<Todo[]>({
   key: "todoState",
   default: [],
 });
 
-export const filteredTodoState = selector<Array<Todo>>({
+export const filteredTodoState = selector<Todo[]>({
   key: "filteredTodoState",
   get: ({ get }) => {
-    const todos: Array<Todo> = get(todoState);
+    const todos: Todo[] = get(todoState);
     const filter: Filter = get(filterState);
 
     switch (filter) {
