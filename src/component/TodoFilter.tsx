@@ -13,7 +13,7 @@ export interface Props {
 
 const TodoFilter: React.FC<Props> = ({ selected, onSelect }) => {
   const todoFilterItems = useMemo<JSX.Element[]>(() => {
-    return Object.values(Filter.getFilters()).map((filter) => (
+    return Filter.getFilters().map((filter: Filter) => (
       <TodoFilterItem
         key={filter.getState()}
         filter={filter}

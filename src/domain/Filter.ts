@@ -5,17 +5,13 @@ export default class Filter {
 
   constructor(private state: string, private text: string, private href: string) {}
 
-  public static getFilters(): { ALL: Filter; ACTIVE: Filter; COMPLETED: Filter } {
-    return {
-      ALL: this.ALL,
-      ACTIVE: this.ACTIVE,
-      COMPLETED: this.COMPLETED,
-    };
+  public static getFilters(): Filter[] {
+    return [this.ALL, this.ACTIVE, this.COMPLETED];
   }
 
   public static findFilter(target: Filter): Filter {
     const filters = this.getFilters();
-    return <Filter>Object.values(filters).find((filter: Filter) => filter.isSame(target));
+    return <Filter>filters.find((filter: Filter) => filter.isSame(target));
   }
 
   private isSame(target: Filter): boolean {

@@ -17,7 +17,7 @@ describe("TodoFilter", () => {
   it("render all filterState btn", () => {
     const { container } = renderFilter();
 
-    Object.values(Filter).forEach((filter: Filter) =>
+    Filter.getFilters().forEach((filter: Filter) =>
       expect(container).toHaveTextContent(filter.getText()),
     );
   });
