@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import Todo from "../domain/Todo";
 
 export interface Props {
@@ -8,12 +8,12 @@ export interface Props {
 }
 
 const TodoListItem: React.FC<Props> = ({ todo, onToggle, onDelete }) => {
-  const getStatus = useCallback((): string => {
-    return todo.isCompleted() ? "completed" : "";
-  }, [todo.isCompleted()]);
+  const className: string = useMemo<string>(() => (todo.isCompleted() ? "completed" : ""), [
+    todo.isCompleted(),
+  ]);
 
   return (
-    <li className={getStatus()} data-id={todo.getId()}>
+    <li className={className} data-id={todo.getId()}>
       <div className="view">
         <input
           className="toggle"
