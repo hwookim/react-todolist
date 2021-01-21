@@ -13,17 +13,17 @@ const TodoListContainer: React.FC = () => {
   const [filter, setFilter] = useRecoilState<Filter>(filterState);
   const filteredTodos = useRecoilValue<Todo[]>(filteredTodoState);
 
-  const handleToggleTodo = useCallback((target: Todo): void => {
+  const handleToggleTodo = (target: Todo): void => {
     const toggle = (todo: Todo): Todo => {
       return target.equals(todo) ? todo.toggle() : todo;
     };
 
     setTodos(todos.map(toggle));
-  }, []);
+  };
 
-  const handleDeleteTodo = useCallback((target: Todo): void => {
+  const handleDeleteTodo = (target: Todo): void => {
     setTodos(todos.filter((todo: Todo) => !target.equals(todo)));
-  }, []);
+  };
 
   const handleSelectFilter = useCallback((filter: Filter): void => {
     setFilter(filter);
